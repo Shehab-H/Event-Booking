@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v70dfbeSqK/LulUaahEDEXD0aRKndW5+x+Y90xBfm9ZpTAlowagjA2ILeQoj4Oi0at9R2a58RrHGtQ2VFJsc9Q==",
+  "dgSpecHash": "YR1uHyBPLSH2Cbthpxrqp7no2oECvGAmGLBTNeREg+CF1PCDYk8wivxyslC/zqyC8/ViKEsV6t2tChGTTc4jGQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

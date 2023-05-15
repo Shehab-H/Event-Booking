@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Application\\Application.csproj": {}
+    "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Application\\Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Application\\Application.csproj": {
+    "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Application\\Application.csproj",
+        "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\HFCS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Application\\obj\\",
+        "outputPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HFCS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Core\\Core.csproj"
+              "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj"
               },
-              "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -66,14 +66,14 @@
         }
       }
     },
-    "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Core\\Core.csproj": {
+    "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\HFCS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Core\\obj\\",
+        "outputPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HFCS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -121,14 +121,14 @@
         }
       }
     },
-    "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\HFCS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HFCS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -145,8 +145,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Core\\Core.csproj"
+              "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj"
               }
             }
           }

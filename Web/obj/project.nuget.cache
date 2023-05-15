@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VrUGqky/+2ILH+UPc4ll5rVZYUoC4Cm9vzdzwmFPSph+ADyi2irFiUWoOgMgZ5EPTwuAt+e5FzhbXbjveozxHQ==",
+  "dgSpecHash": "vX8JuONRRAlty3+lG1g7sWpUkXi0zMQfuaovokPN+0iSw0IhBglE8X3HG/RxN7Gj7OMfA0UpkTb4Ye4/3trXwg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HFCS\\Desktop\\Study projects\\ASP.Net\\Core\\Web\\Web.csproj",
+  "projectFilePath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Web\\Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HFCS\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
