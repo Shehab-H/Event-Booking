@@ -1,0 +1,30 @@
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\bin\Debug\net6.0\Infrastructure.deps.json
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\bin\Debug\net6.0\Infrastructure.dll
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\bin\Debug\net6.0\Infrastructure.pdb
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\bin\Debug\net6.0\Core.dll
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\bin\Debug\net6.0\Core.pdb
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfo.cs
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CopyComplete
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\Infrastructure.dll
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\refint\Infrastructure.dll
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\bin\Debug\net6.0\Infrastructure.deps.json
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\bin\Debug\net6.0\Infrastructure.dll
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\bin\Debug\net6.0\Infrastructure.pdb
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\bin\Debug\net6.0\Core.dll
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\bin\Debug\net6.0\Core.pdb
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfo.cs
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CopyComplete
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\Infrastructure.dll
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\refint\Infrastructure.dll
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
+C:\Users\HFCS\Desktop\Event-Booking\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll
