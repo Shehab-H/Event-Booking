@@ -1,0 +1,24 @@
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\bin\Debug\net6.0\Core.deps.json
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\bin\Debug\net6.0\Core.dll
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\bin\Debug\net6.0\Core.pdb
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\obj\Debug\net6.0\Core.csproj.AssemblyReference.cache
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\obj\Debug\net6.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\obj\Debug\net6.0\Core.AssemblyInfoInputs.cache
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\obj\Debug\net6.0\Core.AssemblyInfo.cs
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\obj\Debug\net6.0\Core.csproj.CoreCompileInputs.cache
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\obj\Debug\net6.0\Core.dll
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\obj\Debug\net6.0\refint\Core.dll
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\obj\Debug\net6.0\Core.pdb
+C:\Users\HFCS\Desktop\Study projects\ASP.Net\Core\Core\obj\Debug\net6.0\ref\Core.dll
+C:\Users\HFCS\Desktop\Event-Booking\Core\bin\Debug\net6.0\Core.deps.json
+C:\Users\HFCS\Desktop\Event-Booking\Core\bin\Debug\net6.0\Core.dll
+C:\Users\HFCS\Desktop\Event-Booking\Core\bin\Debug\net6.0\Core.pdb
+C:\Users\HFCS\Desktop\Event-Booking\Core\obj\Debug\net6.0\Core.csproj.AssemblyReference.cache
+C:\Users\HFCS\Desktop\Event-Booking\Core\obj\Debug\net6.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HFCS\Desktop\Event-Booking\Core\obj\Debug\net6.0\Core.AssemblyInfoInputs.cache
+C:\Users\HFCS\Desktop\Event-Booking\Core\obj\Debug\net6.0\Core.AssemblyInfo.cs
+C:\Users\HFCS\Desktop\Event-Booking\Core\obj\Debug\net6.0\Core.csproj.CoreCompileInputs.cache
+C:\Users\HFCS\Desktop\Event-Booking\Core\obj\Debug\net6.0\Core.dll
+C:\Users\HFCS\Desktop\Event-Booking\Core\obj\Debug\net6.0\refint\Core.dll
+C:\Users\HFCS\Desktop\Event-Booking\Core\obj\Debug\net6.0\Core.pdb
+C:\Users\HFCS\Desktop\Event-Booking\Core\obj\Debug\net6.0\ref\Core.dll
