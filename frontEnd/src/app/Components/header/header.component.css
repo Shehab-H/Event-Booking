@@ -1,0 +1,29 @@
+nav a{
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+nav .nav-item .nav-link {
+ font-size: 1.2vw;
+ font-weight: 350;
+}
+
+@media (max-width: 1024px) {
+  nav .nav-item .nav-link{
+    display: none;
+   }
+}
+@media (max-width: 1440px) {
+  nav .nav-item .nav-link {
+    font-size: 1.5vw;
+   }
+}
+
+nav .navbar-brand{
+  font-weight:bold !important;
+  font-size: x-large !important;
+}
+
+nav{
+  background-color: transparent;
+}

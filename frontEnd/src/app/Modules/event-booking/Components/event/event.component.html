@@ -1,0 +1,93 @@
+<div id="wallpaper-container">
+  <img class="cover-img-mask" [src]="event.backgroundImageUrl" draggable="false">
+  <div class="overlay"></div>
+</div>
+<div id="event-card" class="d-flex align-items-start bg-white">
+  <div id="poster" class="flex-grow-0">
+    <img [src]="event.posterImageUrl">
+  </div>
+  <div class="flex-grow-1 ms-4 txt-dark">
+    <h1  class="mb-3 f1-heavy "  >
+      <span>{{ event.name }}</span>
+    </h1>
+    <div id="discription-container" class="w-100">
+      <p id="description" class="mb-5 w-75 fs-5" style="font-weight:lighter;">
+        {{event.description}}
+      </p>
+    </div>
+
+
+    <!-- trailer button -->
+    <div class="row">
+      <div class="col-2 px-0 f1-medium">
+        <button style="background-color :transparent;color:black;width:100%;border: 2px solid #000000;" mat-button
+          class="d-flex flex-row-reverse align-items-center">
+          <span>Trailer</span>&nbsp;&nbsp;
+          <mat-icon>play_circle_outline</mat-icon>
+        </button>
+      </div>
+    </div>
+    <!-- end of  trailer button -->
+
+
+    <div>
+    <!-- select venue -->
+    <div class="row mt-4">
+      <div class="col-lg-3 d-flex align-items-center justify-content-start">
+        <h5>Venue : </h5>
+      </div>
+      <div class="col-lg-9 select-container d-flex align-items-start">
+        <event-select class="f1-medium" (selectionChanged)="VenueSelected($event)" [options]="Venues" placeholder="select venue ..."
+          class="event-card-select-box"></event-select>
+      </div>
+    </div>
+    <!-- end of select venue -->
+
+    <!-- select show day -->
+    <div class="row mt-4">
+      <div class="col-lg-3 d-flex align-items-center justify-content-start">
+        <h5>Show Day : </h5>
+      </div>
+      <div class="col-lg-9 select-container d-flex align-items-start">
+        <event-select (selectionChanged)="ShowDaySelected($event)" [options]="getFormattedDates()"
+          placeholder="select show day ..." class="event-card-select-box"></event-select>
+      </div>
+    </div>
+
+    <!-- end of select show day -->
+
+    <!-- select show time -->
+
+    <div class="row mt-4">
+      <div class="col-lg-3 d-flex align-items-center justify-content-start">
+        <h5>Show Time : </h5>
+      </div>
+      <div class="col-lg-9 select-container d-flex align-items-start">
+        <event-select (selectionChanged)="ShowTimeSelected($event)" [options]="getFormattedDates()"
+          placeholder="select show time ..." class="event-card-select-box"></event-select>
+      </div>
+    </div>
+    <!-- end of select show time -->
+
+    <!-- select lounge -->
+    <div class="row mt-4">
+      <div class="col-lg-3 d-flex align-items-center justify-content-start">
+        <h5>Lounge : </h5>
+      </div>
+      <div class="col-lg-9 select-container d-flex align-items-start">
+        <event-select (selectionChanged)="LoungeSelected($event)" [options]="getFormattedDates()"
+          placeholder="select lounge..." class="event-card-select-box"></event-select>
+      </div>
+    </div>
+    <!-- end of select lounge -->
+  </div>
+
+    <!-- next button -->
+    <div class="row mt-4 dflex justify-content-end" id="next-button-container" >
+      <button id="next-button" class="mx-5" mat-raised-button style="background-color: #000000; color: white;width: 15%;">Next</button>
+    </div>
+    <!-- end of  next button -->
+
+  </div>
+
+</div>
