@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "vX8JuONRRAlty3+lG1g7sWpUkXi0zMQfuaovokPN+0iSw0IhBglE8X3HG/RxN7Gj7OMfA0UpkTb4Ye4/3trXwg==",
+  "dgSpecHash": "eeggqReZgT/2/i9SOWBG8i0VTo9OMcseWIqRnHKQm5Ql/n4+1L+rLkQieZ3hAVb9HENkfq3tFY1UA9Wx/QWgfw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Web\\Web.csproj",
+  "projectFilePath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HFCS\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\HFCS\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\microsoft.aspnet.webapi.client\\4.0.20710\\microsoft.aspnet.webapi.client.4.0.20710.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\microsoft.aspnet.webapi.core\\4.0.20710\\microsoft.aspnet.webapi.core.4.0.20710.nupkg.sha512",

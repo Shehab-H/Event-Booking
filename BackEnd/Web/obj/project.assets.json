@@ -46,6 +46,19 @@
           }
         }
       },
+      "Bogus/34.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Bogus.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Bogus.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -1386,7 +1399,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Core": "1.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.4"
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.4",
+          "Newtonsoft.Json": "7.0.1"
         },
         "compile": {
           "bin/placeholder/Infrastructure.dll": {}
@@ -1434,6 +1448,25 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "Bogus/34.0.2": {
+      "sha512": "2KQAuMn3fLAQ2r6jeiffZnpv0bi3GCW3iRB2v1KeHIEBu8MNTh9dBlLTZwGvM0pr+9doKkU8L5JgCURmTmT88A==",
+      "type": "package",
+      "path": "bogus/34.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bogus.34.0.2.nupkg.sha512",
+        "bogus.nuspec",
+        "lib/net40/Bogus.dll",
+        "lib/net40/Bogus.xml",
+        "lib/net6.0/Bogus.dll",
+        "lib/net6.0/Bogus.xml",
+        "lib/netstandard1.3/Bogus.dll",
+        "lib/netstandard1.3/Bogus.xml",
+        "lib/netstandard2.0/Bogus.dll",
+        "lib/netstandard2.0/Bogus.xml"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -4226,6 +4259,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Application >= 1.0.0",
+      "Bogus >= 34.0.2",
       "Infrastructure >= 1.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.4",
@@ -4240,11 +4274,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Web\\Web.csproj",
+      "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\Web.csproj",
       "projectName": "Web",
-      "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Web\\Web.csproj",
+      "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\Web.csproj",
       "packagesPath": "C:\\Users\\HFCS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Web\\obj\\",
+      "outputPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HFCS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4261,11 +4295,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Application\\Application.csproj"
+            "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Application\\Application.csproj": {
+              "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Application\\Application.csproj"
             },
-            "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -4280,6 +4314,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Bogus": {
+            "target": "Package",
+            "version": "[34.0.2, )"
+          },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[7.0.4, )"

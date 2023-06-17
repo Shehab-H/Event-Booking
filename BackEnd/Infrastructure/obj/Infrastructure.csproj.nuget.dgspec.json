@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj": {
+    "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\HFCS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\obj\\",
+        "outputPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HFCS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -59,14 +59,14 @@
         }
       }
     },
-    "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\HFCS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HFCS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,8 +83,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj"
+              "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Core\\Core.csproj"
               }
             }
           }
@@ -102,6 +102,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[7.0.1, )"
             }
           },
           "imports": [

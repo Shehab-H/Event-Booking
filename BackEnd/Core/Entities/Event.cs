@@ -14,21 +14,20 @@ namespace Core.Entities
         public string BackGroundUrl { get; private set; }
 
         public string ThumbnailUrl {get; private set;}
+        
+        public string Description { get; private set; }
 
-        public ICollection<EventIteration> Iterations { get; private set; }
 
-
-        public Event(string name ,string type , string backGroundUrl,string thumbnailUrl)
+        public Event(string name ,string type , string backGroundUrl,string thumbnailUrl,string description)
         {
             Name = name;
             Type = type;
             BackGroundUrl = backGroundUrl;
             ThumbnailUrl = thumbnailUrl;
-            Iterations = new List<EventIteration>();
+            Description = description;
         }
         private Event() { 
         }
-
         
     }
 }

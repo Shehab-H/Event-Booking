@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YR1uHyBPLSH2Cbthpxrqp7no2oECvGAmGLBTNeREg+CF1PCDYk8wivxyslC/zqyC8/ViKEsV6t2tChGTTc4jGQ==",
+  "dgSpecHash": "OxTVjJj/E2cCg0DRMdK3vAmIceSzRAyQft/LN7T/Fv5gXGSxTzP13KGoxMz+BV2yzYO5o5+jZAJ0JaKhvjzYVQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HFCS\\Desktop\\Event-Booking\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Core\\Core.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

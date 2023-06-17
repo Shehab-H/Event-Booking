@@ -1,3 +1,5 @@
+using Application.Interfaces;
+using Application.Services;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,7 @@ namespace Web
 
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<IbookingService, BookingService>();
 
 
             var app = builder.Build();
