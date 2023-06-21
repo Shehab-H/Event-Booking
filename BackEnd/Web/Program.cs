@@ -21,7 +21,16 @@ namespace Web
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IbookingService, BookingService>();
-
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllowSpecifcOrigin",
+                                  policy =>
+                                  {
+                                      policy.AllowAnyMethod();
+                                      policy.AllowAnyOrigin();
+                                      policy.AllowAnyHeader();
+                                  });
+            });
 
             var app = builder.Build();
             if (app.Environment.IsDevelopment())

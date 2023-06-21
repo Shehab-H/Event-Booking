@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BookingDbContext))]
-    [Migration("20230617172018_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230621020304_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,10 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -51,16 +55,46 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("events");
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("Core.Entities.EventInstance<Core.Entities.SeatedReservation>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EventInstance<SeatedReservation>");
+
+                    b.UseTptMappingStrategy();
+                });
+
+            modelBuilder.Entity("Core.Entities.EventInstance<Core.Entities.StandingReservation>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EventInstance<StandingReservation>");
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Core.Entities.Seat", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
@@ -72,14 +106,14 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("VenueWithSeatsId")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("VenueWithSeatsId");
 
-                    b.ToTable("Seat");
+                    b.ToTable("Seats");
                 });
 
-            modelBuilder.Entity("Core.Entities.SeatedEventInstance", b =>
+            modelBuilder.Entity("Core.Entities.SeatedReservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,43 +121,20 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VenueId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("VenueId");
-
-                    b.ToTable("SeatedEventInstances");
-                });
-
-            modelBuilder.Entity("Core.Entities.SeatedReservation", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int?>("SeatedEventInstanceId")
+                    b.Property<int?>("EventInstanceId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("SerialNumber")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("SeatedEventInstanceId");
+                    b.HasIndex("EventInstanceId");
 
                     b.ToTable("SeatedReservations");
                 });
 
-            modelBuilder.Entity("Core.Entities.StandingEventInstance", b =>
+            modelBuilder.Entity("Core.Entities.StandingReservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -131,32 +142,8 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AvailableTicketTypes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("EventId")
+                    b.Property<int?>("EventInstanceId")
                         .HasColumnType("int");
-
-                    b.Property<int>("VenueId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("VenueId");
-
-                    b.ToTable("StandingEventInstances");
-                });
-
-            modelBuilder.Entity("Core.Entities.StandingReservation", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");
@@ -164,18 +151,15 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("SerialNumber")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("StandingEventInstanceId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TicketType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("StandingEventInstanceId");
+                    b.HasIndex("EventInstanceId");
 
-                    b.ToTable("standingReservations");
+                    b.ToTable("StandingReservations");
                 });
 
             modelBuilder.Entity("Core.Entities.Venue", b =>
@@ -186,14 +170,6 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lounge")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -202,31 +178,111 @@ namespace Infrastructure.Migrations
 
                     b.ToTable("Venues", (string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Venue");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("SeatSeatedReservation", b =>
                 {
-                    b.Property<int>("SeatedReservationID")
+                    b.Property<int>("SeatedReservationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SeatsID")
+                    b.Property<int>("SeatsId")
                         .HasColumnType("int");
 
-                    b.HasKey("SeatedReservationID", "SeatsID");
+                    b.HasKey("SeatedReservationId", "SeatsId");
 
-                    b.HasIndex("SeatsID");
+                    b.HasIndex("SeatsId");
 
                     b.ToTable("SeatSeatedReservation");
+                });
+
+            modelBuilder.Entity("Core.Entities.SeatedEventInstance", b =>
+                {
+                    b.HasBaseType("Core.Entities.EventInstance<Core.Entities.SeatedReservation>");
+
+                    b.Property<int>("VenueId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("VenueId");
+
+                    b.ToTable("SeatedEventInstances");
+                });
+
+            modelBuilder.Entity("Core.Entities.StandingEventInstance", b =>
+                {
+                    b.HasBaseType("Core.Entities.EventInstance<Core.Entities.StandingReservation>");
+
+                    b.Property<string>("AvailableTicketTypes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("VenueId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("VenueId");
+
+                    b.ToTable("StandingEventInstances");
                 });
 
             modelBuilder.Entity("Core.Entities.VenueWithSeats", b =>
                 {
                     b.HasBaseType("Core.Entities.Venue");
 
-                    b.HasDiscriminator().HasValue("VenueWithSeats");
+                    b.Property<string>("Lounge")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("VenuesWithSeats", (string)null);
+                });
+
+            modelBuilder.Entity("Core.Entities.EventInstance<Core.Entities.SeatedReservation>", b =>
+                {
+                    b.OwnsOne("Core.Entities.TimeRange", "Span", b1 =>
+                        {
+                            b1.Property<int>("EventInstanceId")
+                                .HasColumnType("int");
+
+                            b1.Property<DateTime>("End")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("Start")
+                                .HasColumnType("datetime2");
+
+                            b1.HasKey("EventInstanceId");
+
+                            b1.ToTable("EventInstance<SeatedReservation>");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EventInstanceId");
+                        });
+
+                    b.Navigation("Span")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.EventInstance<Core.Entities.StandingReservation>", b =>
+                {
+                    b.OwnsOne("Core.Entities.TimeRange", "Span", b1 =>
+                        {
+                            b1.Property<int>("EventInstanceId")
+                                .HasColumnType("int");
+
+                            b1.Property<DateTime>("End")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("Start")
+                                .HasColumnType("datetime2");
+
+                            b1.HasKey("EventInstanceId");
+
+                            b1.ToTable("EventInstance<StandingReservation>");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EventInstanceId");
+                        });
+
+                    b.Navigation("Span")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.Seat", b =>
@@ -236,11 +292,40 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("VenueWithSeatsId");
                 });
 
+            modelBuilder.Entity("Core.Entities.SeatedReservation", b =>
+                {
+                    b.HasOne("Core.Entities.EventInstance<Core.Entities.SeatedReservation>", null)
+                        .WithMany("Reservations")
+                        .HasForeignKey("EventInstanceId");
+                });
+
+            modelBuilder.Entity("Core.Entities.StandingReservation", b =>
+                {
+                    b.HasOne("Core.Entities.EventInstance<Core.Entities.StandingReservation>", null)
+                        .WithMany("Reservations")
+                        .HasForeignKey("EventInstanceId");
+                });
+
+            modelBuilder.Entity("SeatSeatedReservation", b =>
+                {
+                    b.HasOne("Core.Entities.SeatedReservation", null)
+                        .WithMany()
+                        .HasForeignKey("SeatedReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Seat", null)
+                        .WithMany()
+                        .HasForeignKey("SeatsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Core.Entities.SeatedEventInstance", b =>
                 {
-                    b.HasOne("Core.Entities.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId")
+                    b.HasOne("Core.Entities.EventInstance<Core.Entities.SeatedReservation>", null)
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.SeatedEventInstance", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -250,45 +335,14 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Core.Entities.TimeRange", "Span", b1 =>
-                        {
-                            b1.Property<int>("SeatedEventInstanceId")
-                                .HasColumnType("int");
-
-                            b1.Property<DateTime>("End")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<DateTime>("Start")
-                                .HasColumnType("datetime2");
-
-                            b1.HasKey("SeatedEventInstanceId");
-
-                            b1.ToTable("SeatedEventInstances");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SeatedEventInstanceId");
-                        });
-
-                    b.Navigation("Event");
-
-                    b.Navigation("Span")
-                        .IsRequired();
-
                     b.Navigation("Venue");
-                });
-
-            modelBuilder.Entity("Core.Entities.SeatedReservation", b =>
-                {
-                    b.HasOne("Core.Entities.SeatedEventInstance", null)
-                        .WithMany("Reservations")
-                        .HasForeignKey("SeatedEventInstanceId");
                 });
 
             modelBuilder.Entity("Core.Entities.StandingEventInstance", b =>
                 {
-                    b.HasOne("Core.Entities.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId")
+                    b.HasOne("Core.Entities.EventInstance<Core.Entities.StandingReservation>", null)
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.StandingEventInstance", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -298,57 +352,17 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Core.Entities.TimeRange", "Span", b1 =>
-                        {
-                            b1.Property<int>("StandingEventInstanceId")
-                                .HasColumnType("int");
-
-                            b1.Property<DateTime>("End")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<DateTime>("Start")
-                                .HasColumnType("datetime2");
-
-                            b1.HasKey("StandingEventInstanceId");
-
-                            b1.ToTable("StandingEventInstances");
-
-                            b1.WithOwner()
-                                .HasForeignKey("StandingEventInstanceId");
-                        });
-
-                    b.Navigation("Event");
-
-                    b.Navigation("Span")
-                        .IsRequired();
-
                     b.Navigation("Venue");
-                });
-
-            modelBuilder.Entity("Core.Entities.StandingReservation", b =>
-                {
-                    b.HasOne("Core.Entities.StandingEventInstance", null)
-                        .WithMany("reservations")
-                        .HasForeignKey("StandingEventInstanceId");
-                });
-
-            modelBuilder.Entity("SeatSeatedReservation", b =>
-                {
-                    b.HasOne("Core.Entities.SeatedReservation", null)
-                        .WithMany()
-                        .HasForeignKey("SeatedReservationID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.Seat", null)
-                        .WithMany()
-                        .HasForeignKey("SeatsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.VenueWithSeats", b =>
                 {
+                    b.HasOne("Core.Entities.Venue", null)
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.VenueWithSeats", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsMany("Core.Entities.TimeRange", "BookedSlots", b1 =>
                         {
                             b1.Property<int>("VenueWithSeatsId")
@@ -368,7 +382,7 @@ namespace Infrastructure.Migrations
 
                             b1.HasKey("VenueWithSeatsId", "Id");
 
-                            b1.ToTable("Venues_BookedSlots");
+                            b1.ToTable("VenuesWithSeats_BookedSlots");
 
                             b1.WithOwner()
                                 .HasForeignKey("VenueWithSeatsId");
@@ -377,14 +391,14 @@ namespace Infrastructure.Migrations
                     b.Navigation("BookedSlots");
                 });
 
-            modelBuilder.Entity("Core.Entities.SeatedEventInstance", b =>
+            modelBuilder.Entity("Core.Entities.EventInstance<Core.Entities.SeatedReservation>", b =>
                 {
                     b.Navigation("Reservations");
                 });
 
-            modelBuilder.Entity("Core.Entities.StandingEventInstance", b =>
+            modelBuilder.Entity("Core.Entities.EventInstance<Core.Entities.StandingReservation>", b =>
                 {
-                    b.Navigation("reservations");
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("Core.Entities.VenueWithSeats", b =>

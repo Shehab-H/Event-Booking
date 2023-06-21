@@ -6,42 +6,33 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class StandingEventInstance 
+    public  class StandingEventInstance : EventInstance<StandingReservation>
     {
-        public int Id { get; private set; }
-        public Event Event { get; private set; }
+        public int VenueId { get; private set; }
 
-        public TimeRange Span { get; private set; }
-
-        public int VenueID { get;private set; }
         public Venue Venue { get; private set; }
 
-        private IDictionary<string, uint> _availableTicketTypes;
 
+        private IDictionary<string, uint> _availableTicketTypes;
         public IReadOnlyDictionary<string, uint> AvailableTicketTypes => new Dictionary<string, uint>(_availableTicketTypes);
-        public ICollection<StandingReservation> reservations { get; private set; }
-        public StandingEventInstance(Venue venue,TimeRange span,IDictionary<string,uint> ticketTypes)
+
+        public StandingEventInstance(int venueId, TimeRange span) : base(span)
         {
-            Venue = venue;
-            Span = span;
-            _availableTicketTypes=ticketTypes;
+            VenueId=venueId;
         }
-        
-        private StandingEventInstance() { 
-        }
-        public void Book(StandingReservation reservation)
+        private StandingEventInstance()
+        {}
+        public override void MakeReservation(StandingReservation reservation)
         {
             if (!(_availableTicketTypes.ContainsKey(reservation.TicketType)))
                 throw new InvalidOperationException("Invalid ticket type");
 
-            _availableTicketTypes[reservation.TicketType] -= reservation.Quantity;
-            reservations.Add(reservation);
-        }
+            if (_availableTicketTypes[reservation.TicketType] < reservation.Quantity)
+                throw new InvalidOperationException("Insuffecient amount of tickets");
 
-        public void addTicketType(string ticketType,uint quntity)
-        {
-            _availableTicketTypes.Add(ticketType, quntity);
+            _availableTicketTypes[reservation.TicketType] -= reservation.Quantity;
+            _reservations.Add(reservation);
         }
-        
     }
 }
+

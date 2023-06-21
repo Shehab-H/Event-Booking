@@ -73,19 +73,19 @@ namespace Web.Controllers
         [Route("[action]")]
         public void SeedEventInstances()
         {
-            var @event = _context.Events.Where(e => e.Name == "the shawshank redemption")
-                .SingleOrDefault();
+            //var @event = _context.Events.Where(e => e.Name == "the shawshank redemption")
+            //    .SingleOrDefault();
 
-            var venue = _context.VenuesWithSeats.FirstOrDefault();
+            //var venue = _context.VenuesWithSeats.FirstOrDefault();
 
-            var timeRange = new TimeRange(new DateTime(2023, 8, 20, 10, 30, 0), new DateTime(2023, 8, 20, 12, 30, 0));
-            var seatedEventInstance = new SeatedEventInstance(venue, @event,timeRange);
+            //var timeRange = new TimeRange(new DateTime(2023, 8, 20, 10, 30, 0), new DateTime(2023, 8, 20, 12, 30, 0));
+            //var seatedEventInstance = new SeatedEventInstance(venue, @event,timeRange);
 
-            venue.BookSlot(timeRange);
+            //venue.BookSlot(timeRange);
 
-            _context.Add(seatedEventInstance);
+            //_context.Add(seatedEventInstance);
 
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         [HttpPost]
@@ -107,11 +107,11 @@ namespace Web.Controllers
         [HttpPost]
         [Route("[action]/{instanceId}/")]
 
-        public IActionResult Book(int instanceId,ICollection<int> seatIds)
+        public async Task<IActionResult> Book(int instanceId,[FromBody]ICollection<int> seatIds)
         {
             try
             {
-                _bookingService.Book(instanceId,seatIds);
+                await _bookingService.Book(instanceId,seatIds);
             }
             catch (Exception ex)
             {
@@ -119,5 +119,7 @@ namespace Web.Controllers
             }
             return Ok();
         }
+
+      
     }
 }

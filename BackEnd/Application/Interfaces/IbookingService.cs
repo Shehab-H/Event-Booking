@@ -9,8 +9,8 @@ namespace Application.Interfaces
 {
     public interface IbookingService
     {
-        public void Book(int eventInstanceId, ICollection<int> seatIds);
-        public void Book(int eventInstanceID, string ticketType , uint quantity);
+        public Task Book(int eventInstanceId, ICollection<int> seatIds);
+        public Task Book(int eventInstanceID, string ticketType , uint quantity);
 
 
     }

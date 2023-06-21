@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class TimeRange
+    public class TimeRange : IEquatable<TimeRange>
     {
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
@@ -25,6 +25,11 @@ namespace Core.Entities
         public bool Overlaps(TimeRange other)
         {
             return other.Start < End && Start < other.End;
+        }
+
+        public bool Equals(TimeRange? other)
+        {
+            return other?.Start==Start && other.End==End;
         }
     }
 }

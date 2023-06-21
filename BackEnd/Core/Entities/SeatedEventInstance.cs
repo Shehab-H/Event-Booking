@@ -6,45 +6,33 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class SeatedEventInstance
+    public class SeatedEventInstance : EventInstance<SeatedReservation>
     {
-        public int Id { get; private set; }
-        public Event Event { get; private set; }
 
-        public TimeRange Span { get;private set; }
-        public int VenueID { get; private set; }
+        public int VenueId { get; private set; }
 
         public VenueWithSeats Venue { get; private set; }
 
-        private ICollection<SeatedReservation> reservations;
+        public ICollection<Seat> AllReservedSeats => _reservations.SelectMany(r => r.Seats).ToList();
 
-        public IReadOnlyCollection<SeatedReservation> Reservations => reservations.ToList();
-
-        public ICollection<Seat> AllReservedSeats => reservations.SelectMany(r => r.Seats).ToList();
-
-        public SeatedEventInstance(VenueWithSeats venue, Event @event, TimeRange span)
+        public SeatedEventInstance(int venueId,TimeRange span) : base(span)
         {
-            Venue = venue;
-            Event = @event;
-            Span = span;
+            VenueId = venueId;
         }
+        private SeatedEventInstance()
+        {}
 
-        private SeatedEventInstance() { }
-
-        public void Book(SeatedReservation reservation)
+        public override void MakeReservation(SeatedReservation reservation)
         {
-            // make sure that every seat in the reservation is in the venue and not resreved already
             if ((!Venue.HasSeats(reservation.Seats)) || IsSeatsReserved(reservation.Seats))
                 throw new InvalidOperationException("some or all of the seats are not available");
 
 
-            reservations.Add(reservation);
+            _reservations.Add(reservation);
         }
-
         private bool IsSeatsReserved(ICollection<Seat> seats)
         {
             return seats.Select(s => s.Id).Intersect(AllReservedSeats.Select(s => s.Id)).Any();
         }
-
     }
 }

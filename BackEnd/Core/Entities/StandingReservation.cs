@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class StandingReservation
+    public class StandingReservation : Reservation
     {
-        public int ID { get; private set; }
-        public Guid SerialNumber { get; private set; }
 
         public string TicketType { get; private set; }
 
         public uint Quantity { get; private set; }
-        public StandingReservation(string ticketType, uint quantity)
+        public StandingReservation(string ticketType, uint quantity) : base()
         {
-            SerialNumber=Guid.NewGuid();
             this.TicketType = ticketType;
             this.Quantity = quantity;
         }

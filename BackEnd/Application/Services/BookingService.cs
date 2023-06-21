@@ -17,49 +17,53 @@ namespace Application.Services
         {
             _dbContext = dbContext;
         }
-        public void Book(int eventInstanceId,string ticketType,uint quantity)
+        public async Task Book(int eventInstanceId,string ticketType,uint quantity)
         {
-            var eventInstance = _dbContext.StandingEventInstances
-                .Include(e=>e.reservations)
-                .SingleOrDefault(i=>i.Id == eventInstanceId);
+            EventInstance<StandingReservation>? instance = await _dbContext.StandingEventInstances
+                .Include(e=>e.Reservations)
+                .SingleOrDefaultAsync(i=>i.Id == eventInstanceId);
 
-            if (eventInstance == null)
+            if (instance == null)
             {
                 throw new Exception("event instance not found");
             }
 
-            StandingReservation reservation = new StandingReservation(ticketType,quantity);
 
-            eventInstance.Book(reservation);
+            instance.MakeReservation(new StandingReservation(ticketType, quantity));
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void Book(int eventInstanceId, ICollection<int> seatIds)
+        public async Task Book(int eventInstanceId, ICollection<int> seatIds)
         {
-            var seats = _dbContext.Seats.Where(s=> seatIds.Contains(s.Id)).ToList();
+            var seats = await GetSeats(seatIds);
 
-            var missingSeatIds = seatIds.Except(seats.Select(s => s.Id));
-
-            if(missingSeatIds.Any())
-            {
-                throw new Exception($"some of the seats provided doesn't exist doesn't exist");
-            }
-
-            var eventInstance = _dbContext.SeatedEventInstances
+            EventInstance<SeatedReservation>? instance = await _dbContext.SeatedEventInstances
                 .Include(s => s.Reservations).ThenInclude(r => r.Seats)
                 .Include(s => s.Venue).ThenInclude(v => v.Seats)
-                .SingleOrDefault(e => e.Id == eventInstanceId);
+                .SingleOrDefaultAsync(e => e.Id == eventInstanceId);
 
-            if(eventInstance == null)
+            if(instance == null)
             {
                 throw new Exception("event instance doesn't exist");
             }
 
-            eventInstance.Book(new SeatedReservation(seats));
+            instance.MakeReservation(new SeatedReservation(seats));
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
+        }
 
+        private async Task<ICollection<Seat>> GetSeats(ICollection<int> seatIds)
+        {
+            var seats = await _dbContext.Seats.Where(s => seatIds.Contains(s.Id)).ToListAsync();
+
+            var missingSeatIds = seatIds.Except(seats.Select(s => s.Id));
+
+            if (missingSeatIds.Any())
+            {
+                throw new Exception($"some of the seats provided doesn't exist");
+            }
+            return seats;
         }
 
     }
