@@ -17,6 +17,7 @@ namespace Infrastructure.Data
         public DbSet<SeatedEventInstance> SeatedEventInstances { get; set; }
 
         public DbSet<Venue> Venues { get; set;}
+        public DbSet<VenueWithSeats> VenuesWithSeats { get; set; }
 
         public DbSet<Seat> Seats { get; set;}
 
@@ -29,17 +30,18 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<EventInstance>(i =>
+            {
+                i.UseTpcMappingStrategy();
+                i.HasOne(i => i.Event).WithMany();
 
-            modelBuilder.Entity<EventInstance<SeatedReservation>>().OwnsOne(i=>i.Span);
-
-            modelBuilder.Entity<EventInstance<StandingReservation>>().OwnsOne(i => i.Span);
-
+            });
 
             modelBuilder.Entity<SeatedEventInstance>().Ignore(e => e.AllReservedSeats);
 
             modelBuilder.Entity<VenueWithSeats>().HasMany(v => v.Seats).WithOne();
 
-            modelBuilder.Entity<VenueWithSeats>().OwnsMany(v => v.BookedSlots);
+            modelBuilder.Entity<Venue>().OwnsMany(v => v.BookedSlots);
 
             modelBuilder.Entity<SeatedReservation>().HasMany(s => s.Seats).WithMany();
 
@@ -55,19 +57,21 @@ namespace Infrastructure.Data
             modelBuilder.Entity<VenueWithSeats>().ToTable("VenuesWithSeats");
 
 
+            modelBuilder.Entity<SeatedEventInstance>(e =>
+            {
+                e.HasMany(h => h.Reservations).WithOne();
+                e.OwnsOne(e => e.Span);
+                e.HasOne(h => h.Venue).WithMany()
+                .HasForeignKey(h => h.VenueId);
+            });
 
-
-            modelBuilder.Entity<SeatedEventInstance>().HasOne(h => h.Venue).WithMany()
-                .HasForeignKey(h=>h.VenueId);
-            modelBuilder.Entity<StandingEventInstance>().HasOne(h => h.Venue).WithMany()
-                .HasForeignKey(h=>h.VenueId);
-
-            modelBuilder.Entity<EventInstance<SeatedReservation>>().HasMany(h=>h.Reservations).WithOne();
-            modelBuilder.Entity<EventInstance<StandingReservation>>().HasMany(h => h.Reservations).WithOne();
-
-
-            modelBuilder.Entity<EventInstance<StandingReservation>>().UseTptMappingStrategy();
-            modelBuilder.Entity<EventInstance<SeatedReservation>>().UseTptMappingStrategy();
+            modelBuilder.Entity<StandingEventInstance>(e =>
+            {
+                e.HasMany(h => h.Reservations).WithOne();
+                e.OwnsOne(e => e.Span);
+                e.HasOne(h => h.Venue).WithMany()
+                .HasForeignKey(h => h.VenueId);
+            });
 
         }
 

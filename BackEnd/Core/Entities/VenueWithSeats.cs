@@ -21,7 +21,8 @@ namespace Core.Entities
             {
                 throw new ArgumentException("Cannot have duplicate seats");
             }
-            _seats = seats;            Lounge = lounge;
+            _seats = seats;
+            Lounge = lounge;
 
         }
 

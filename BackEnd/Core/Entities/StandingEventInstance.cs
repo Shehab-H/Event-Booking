@@ -6,24 +6,27 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public  class StandingEventInstance : EventInstance<StandingReservation>
+    public  class StandingEventInstance : EventInstance
     {
         public int VenueId { get; private set; }
 
-        public Venue Venue { get; private set; }
+        public Venue Venue { get; private set;}
 
+        private ICollection<StandingReservation> _reservations;
+        public IReadOnlyCollection<StandingReservation> Reservations => _reservations.ToList();
 
         private IDictionary<string, uint> _availableTicketTypes;
         public IReadOnlyDictionary<string, uint> AvailableTicketTypes => new Dictionary<string, uint>(_availableTicketTypes);
 
-        public StandingEventInstance(int venueId, TimeRange span) : base(span)
+        public StandingEventInstance(int venueId, TimeRange span,int eventId) : base(span, eventId)
         {
             VenueId=venueId;
         }
         private StandingEventInstance()
         {}
-        public override void MakeReservation(StandingReservation reservation)
+        public void MakeReservation(StandingReservation reservation)
         {
+            
             if (!(_availableTicketTypes.ContainsKey(reservation.TicketType)))
                 throw new InvalidOperationException("Invalid ticket type");
 

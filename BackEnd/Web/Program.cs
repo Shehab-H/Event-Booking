@@ -1,6 +1,8 @@
 using Application.Interfaces;
 using Application.Services;
+using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,7 @@ namespace Web
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IbookingService, BookingService>();
+            builder.Services.AddScoped<IEventRepository, EventRepository>();
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(name: "AllowSpecifcOrigin",
@@ -44,7 +47,6 @@ namespace Web
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

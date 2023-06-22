@@ -12,19 +12,19 @@ namespace Web.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        BookingDbContext _context;
-        IbookingService _bookingService;
-        public EventController(BookingDbContext context,IbookingService bookingService)
+        private readonly IbookingService _bookingService;
+        private readonly BookingDbContext _bookingDbContext;
+        
+        public EventController(IbookingService bookingService , BookingDbContext bookingDbContext)
         {
-            _context = context;
-            _bookingService=bookingService;
+            _bookingDbContext = bookingDbContext;
+            _bookingService = bookingService;
         }
 
         [HttpPost]
         [Route("[action]")]
-        public void SeedEventsAndVenues()
+        public IActionResult SeedEventsAndVenues()
         {
-            // Movies
             var movie1 = new Event("The Shawshank Redemption", "Movie", "/shawshank_redemption.jpg", "/shawshank_redemption_thumbnail.jpg", "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.");
             var movie2 = new Event("The Godfather", "Movie", "/godfather.jpg", "/godfather_thumbnail.jpg", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.");
             var movie3 = new Event("The Godfather: Part II", "Movie", "/godfather_part_2.jpg", "/godfather_part_2_thumbnail.jpg", "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.");
@@ -45,47 +45,56 @@ namespace Web.Controllers
             var theater4 = new Event("Wicked", "Theater Show", "/wicked.jpg", "/wicked_thumbnail.jpg", "The untold story of the witches of Oz: Elphaba, born with emerald-green skin, is smart, fiery and misunderstood. Glinda is beautiful, ambitious and very popular. The remarkable odyssey of how these unexpected friends changed each other's lives for good has made Wicked one of the world's most popular musicals.");
             var theater5 = new Event("The Lion King", "Theater Show", "/lion_king.jpg", "/lion_king_thumbnail.jpg", "A young lion prince is cast out of his pride by his cruel uncle, who claims he killed his father. While the uncle rules with an iron paw, the prince grows up beyond the Savannah, living by a philosophy: No worries for the rest of your days. But when his past comes to haunt him, the young prince must decide his fate: Will he remain an outcast or face his demons and become what he needs to be?");
 
-            _context.Events.AddRange(movie1, movie2, movie3, movie4, movie5,
+
+            _bookingDbContext.Events.AddRange(movie1, movie2, movie3, movie4, movie5,
                 concert1, concert2, concert3, concert4, concert5,
-                theater1,theater2,theater3,theater4,theater5
+                theater1, theater2, theater3, theater4, theater5
                 );
 
             var Venue1 = new Venue("Wembly Stadium");
 
             List<Seat> seats = new List<Seat>();
 
-            for(char row='A'; row <'Z'; row++)
+            for (char row = 'A'; row < 'Z'; row++)
             {
-                for(int n = 1; n<11; n++)
+                for (int n = 1; n < 11; n++)
                 {
                     seats.Add(new Seat(row, n));
                 }
             }
 
-            var Venue2 = new VenueWithSeats("Point 90 Cinema", seats,"Lounge1");
+            var Venue2 = new VenueWithSeats("Point 90 Cinema", seats, "Lounge1");
 
-            _context.Venues.AddRange(Venue1, Venue2);
-
-            _context.SaveChanges();
+      
+            _bookingDbContext.Venues.AddRange(Venue1, Venue2);
+            try
+            {
+                _bookingDbContext.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                return Ok(e);
+            }
+            return Ok();
         }
 
         [HttpPost]
         [Route("[action]")]
         public void SeedEventInstances()
         {
-            //var @event = _context.Events.Where(e => e.Name == "the shawshank redemption")
-            //    .SingleOrDefault();
+            var @event = _bookingDbContext.Events.Where(e => e.Name == "the shawshank redemption")
+                .SingleOrDefault();
 
-            //var venue = _context.VenuesWithSeats.FirstOrDefault();
+            var venue = _bookingDbContext.VenuesWithSeats.FirstOrDefault();
 
-            //var timeRange = new TimeRange(new DateTime(2023, 8, 20, 10, 30, 0), new DateTime(2023, 8, 20, 12, 30, 0));
-            //var seatedEventInstance = new SeatedEventInstance(venue, @event,timeRange);
+            var timeRange = new TimeRange(new DateTime(2023, 8, 20, 10, 30, 0), new DateTime(2023, 8, 20, 12, 30, 0));
+            var seatedEventInstance = new SeatedEventInstance(venue.Id, timeRange, @event.Id);
 
-            //venue.BookSlot(timeRange);
+            venue.BookSlot(timeRange);
 
-            //_context.Add(seatedEventInstance);
+            _bookingDbContext.Add(seatedEventInstance);
 
-            //_context.SaveChanges();
+            _bookingDbContext.SaveChanges();
         }
 
         [HttpPost]
@@ -111,7 +120,7 @@ namespace Web.Controllers
         {
             try
             {
-                await _bookingService.Book(instanceId,seatIds);
+               _bookingService.Book(instanceId,seatIds);
             }
             catch (Exception ex)
             {

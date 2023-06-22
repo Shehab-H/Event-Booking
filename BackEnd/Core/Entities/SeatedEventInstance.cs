@@ -6,23 +6,26 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class SeatedEventInstance : EventInstance<SeatedReservation>
+    public class SeatedEventInstance : EventInstance
     {
 
         public int VenueId { get; private set; }
 
+        private ICollection<SeatedReservation> _reservations;
+
         public VenueWithSeats Venue { get; private set; }
 
+        public IReadOnlyCollection<SeatedReservation> Reservations => _reservations.ToList();
         public ICollection<Seat> AllReservedSeats => _reservations.SelectMany(r => r.Seats).ToList();
 
-        public SeatedEventInstance(int venueId,TimeRange span) : base(span)
+        public SeatedEventInstance(int venueId,TimeRange span , int eventId) : base(span, eventId)
         {
             VenueId = venueId;
         }
         private SeatedEventInstance()
         {}
 
-        public override void MakeReservation(SeatedReservation reservation)
+        public  void MakeReservation(SeatedReservation reservation)
         {
             if ((!Venue.HasSeats(reservation.Seats)) || IsSeatsReserved(reservation.Seats))
                 throw new InvalidOperationException("some or all of the seats are not available");

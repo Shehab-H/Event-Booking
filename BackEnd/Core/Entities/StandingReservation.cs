@@ -8,7 +8,6 @@ namespace Core.Entities
 {
     public class StandingReservation : Reservation
     {
-
         public string TicketType { get; private set; }
 
         public uint Quantity { get; private set; }
