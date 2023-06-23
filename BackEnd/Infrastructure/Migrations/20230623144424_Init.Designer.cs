@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BookingDbContext))]
-    [Migration("20230622214541_Init")]
+    [Migration("20230623144424_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -24,8 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.HasSequence("EventInstanceSequence");
 
             modelBuilder.Entity("Core.Entities.Event", b =>
                 {
@@ -64,16 +62,20 @@ namespace Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR [EventInstanceSequence]");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable((string)null);
+                    b.HasIndex("EventId");
 
-                    b.UseTpcMappingStrategy();
+                    b.ToTable("EventsInstances");
+
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Core.Entities.Seat", b =>
@@ -223,6 +225,17 @@ namespace Infrastructure.Migrations
                     b.ToTable("VenuesWithSeats", (string)null);
                 });
 
+            modelBuilder.Entity("Core.Entities.EventInstance", b =>
+                {
+                    b.HasOne("Core.Entities.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("Core.Entities.Seat", b =>
                 {
                     b.HasOne("Core.Entities.VenueWithSeats", null)
@@ -291,6 +304,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.SeatedEventInstance", b =>
                 {
+                    b.HasOne("Core.Entities.EventInstance", null)
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.SeatedEventInstance", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.VenueWithSeats", "Venue")
                         .WithMany()
                         .HasForeignKey("VenueId")
@@ -324,6 +343,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.StandingEventInstance", b =>
                 {
+                    b.HasOne("Core.Entities.EventInstance", null)
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.StandingEventInstance", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Venue", "Venue")
                         .WithMany()
                         .HasForeignKey("VenueId")

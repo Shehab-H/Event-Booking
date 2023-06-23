@@ -13,6 +13,8 @@ namespace Infrastructure.Data
     public class BookingDbContext : DbContext
     {
         public DbSet<Event> Events { get; set; }
+
+        public DbSet<EventInstance> EventsInstances { get; set; }
         public DbSet<StandingEventInstance> StandingEventInstances { get; set; }
         public DbSet<SeatedEventInstance> SeatedEventInstances { get; set; }
 
@@ -32,7 +34,8 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<EventInstance>(i =>
             {
-                i.UseTpcMappingStrategy();
+                i.OwnsOne(e => e.Span);
+                i.UseTptMappingStrategy();
                 i.HasOne(i => i.Event).WithMany();
 
             });
@@ -60,7 +63,6 @@ namespace Infrastructure.Data
             modelBuilder.Entity<SeatedEventInstance>(e =>
             {
                 e.HasMany(h => h.Reservations).WithOne();
-                e.OwnsOne(e => e.Span);
                 e.HasOne(h => h.Venue).WithMany()
                 .HasForeignKey(h => h.VenueId);
             });

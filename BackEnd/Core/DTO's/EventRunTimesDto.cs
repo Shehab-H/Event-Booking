@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace Core.DTO_s
 {
-    public record EventInstanceDto(int Id, TimeRange Span, List<string> Lounges);
+    public record EventRunTimesDto(int EventInstanceId, TimeRange Span);
 
 }

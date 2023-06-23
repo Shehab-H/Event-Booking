@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Core.DTO_s;
 using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repository
+namespace Infrastructure.Repositories
 {
     public class EventRepository : IEventRepository
     {
@@ -43,9 +41,9 @@ namespace Infrastructure.Repository
             return instance;
         }
 
-        public void SaveChanges()
+        public int SaveChanges()
         {
-            _bookingDbContext.SaveChanges();
+           return _bookingDbContext.SaveChanges();
         }
 
         public ICollection<Seat> GetSeats(ICollection<int> seatIds)
@@ -55,6 +53,44 @@ namespace Infrastructure.Repository
 
             return seats;
 
+        }
+
+        public Event GetEvent(int id)
+        {
+            var @event = _bookingDbContext.Events.AsNoTracking().SingleOrDefault(e=>e.Id==id);
+            if(@event == null)
+            {
+                throw new ArgumentException($"Event with id : {id} was not found ");
+            }
+            return @event;
+        }
+
+        public ICollection<EventRunTimesDto> GetTimeSpans(int venueId, int eventId)
+        {
+            var runTimes = _bookingDbContext.SeatedEventInstances
+                .AsNoTracking().
+                Where(i => i.EventId == eventId && i.VenueId == venueId)
+               .MapToDto()
+               .ToList();
+
+            if (runTimes == null)
+            {
+                throw new Exception($"there are no instances running in the venue with" +
+                    $" id : {venueId} and event id : {venueId}");
+            }
+
+            return runTimes;
+        }
+
+        public ICollection<SeatedVenueNamesDto> GetVenueNames(int eventId)
+        {
+            var venues = _bookingDbContext
+                .SeatedEventInstances
+                .Where(e => e.EventId == eventId)
+                .MapToSeatedVenueDto()
+                .ToList();
+
+            return venues;
         }
     }
 }

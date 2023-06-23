@@ -22,8 +22,6 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.HasSequence("EventInstanceSequence");
-
             modelBuilder.Entity("Core.Entities.Event", b =>
                 {
                     b.Property<int>("Id")
@@ -61,10 +59,9 @@ namespace Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEXT VALUE FOR [EventInstanceSequence]");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("EventId")
                         .HasColumnType("int");
@@ -73,9 +70,9 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable((string)null);
+                    b.ToTable("EventsInstances");
 
-                    b.UseTpcMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Core.Entities.Seat", b =>
@@ -233,7 +230,29 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.OwnsOne("Core.Entities.TimeRange", "Span", b1 =>
+                        {
+                            b1.Property<int>("EventInstanceId")
+                                .HasColumnType("int");
+
+                            b1.Property<DateTime>("End")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("Start")
+                                .HasColumnType("datetime2");
+
+                            b1.HasKey("EventInstanceId");
+
+                            b1.ToTable("EventsInstances");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EventInstanceId");
+                        });
+
                     b.Navigation("Event");
+
+                    b.Navigation("Span")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.Seat", b =>
@@ -304,32 +323,16 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.SeatedEventInstance", b =>
                 {
+                    b.HasOne("Core.Entities.EventInstance", null)
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.SeatedEventInstance", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.VenueWithSeats", "Venue")
                         .WithMany()
                         .HasForeignKey("VenueId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("Core.Entities.TimeRange", "Span", b1 =>
-                        {
-                            b1.Property<int>("SeatedEventInstanceId")
-                                .HasColumnType("int");
-
-                            b1.Property<DateTime>("End")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<DateTime>("Start")
-                                .HasColumnType("datetime2");
-
-                            b1.HasKey("SeatedEventInstanceId");
-
-                            b1.ToTable("SeatedEventInstances");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SeatedEventInstanceId");
-                        });
-
-                    b.Navigation("Span")
                         .IsRequired();
 
                     b.Navigation("Venue");
@@ -337,32 +340,16 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.StandingEventInstance", b =>
                 {
+                    b.HasOne("Core.Entities.EventInstance", null)
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.StandingEventInstance", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Venue", "Venue")
                         .WithMany()
                         .HasForeignKey("VenueId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("Core.Entities.TimeRange", "Span", b1 =>
-                        {
-                            b1.Property<int>("StandingEventInstanceId")
-                                .HasColumnType("int");
-
-                            b1.Property<DateTime>("End")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<DateTime>("Start")
-                                .HasColumnType("datetime2");
-
-                            b1.HasKey("StandingEventInstanceId");
-
-                            b1.ToTable("StandingEventInstances");
-
-                            b1.WithOwner()
-                                .HasForeignKey("StandingEventInstanceId");
-                        });
-
-                    b.Navigation("Span")
                         .IsRequired();
 
                     b.Navigation("Venue");

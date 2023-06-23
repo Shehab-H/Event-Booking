@@ -5,10 +5,8 @@ namespace Application.Interfaces
 {
     public interface IEventService
     {
-       public Task<Event> GetById(int id);
-       public Task<List<EventInstanceDto>> GetInstances(int eventId, int venueId);
-       
-
-       
+       public Event GetById(int id);
+       public ICollection<EventRunTimesDto> GetRunTimes(int eventId, int venueId);
+       public ICollection<SeatedVenueNamesDto> GetVenues(int eventId);
     }
 }

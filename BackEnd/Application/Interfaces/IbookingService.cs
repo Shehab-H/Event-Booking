@@ -11,7 +11,5 @@ namespace Application.Interfaces
     {
         public void Book(int eventInstanceId, ICollection<int> seatIds);
         public void Book(int eventInstanceID, string ticketType , uint quantity);
-
-
     }
 }

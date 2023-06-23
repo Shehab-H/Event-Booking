@@ -5,6 +5,7 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Web.Controllers
 {
@@ -13,10 +14,14 @@ namespace Web.Controllers
     public class EventController : ControllerBase
     {
         private readonly IbookingService _bookingService;
+        private readonly IEventService _eventService;
         private readonly BookingDbContext _bookingDbContext;
         
-        public EventController(IbookingService bookingService , BookingDbContext bookingDbContext)
+        public EventController(IbookingService bookingService 
+            , BookingDbContext bookingDbContext 
+            , IEventService eventService)
         {
+            _eventService = eventService;
             _bookingDbContext = bookingDbContext;
             _bookingService = bookingService;
         }
@@ -78,7 +83,7 @@ namespace Web.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPatch]
         [Route("[action]")]
         public void SeedEventInstances()
         {
@@ -97,7 +102,7 @@ namespace Web.Controllers
             _bookingDbContext.SaveChanges();
         }
 
-        [HttpPost]
+        [HttpPatch]
         [Route("[action]/{instanceId}/{ticketType}/{quantity}")]
 
         public IActionResult Book(int instanceId,string ticketType,uint quantity)
@@ -113,10 +118,10 @@ namespace Web.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPatch]
         [Route("[action]/{instanceId}/")]
 
-        public async Task<IActionResult> Book(int instanceId,[FromBody]ICollection<int> seatIds)
+        public  IActionResult Book(int instanceId,[FromBody]ICollection<int> seatIds)
         {
             try
             {
@@ -129,6 +134,50 @@ namespace Web.Controllers
             return Ok();
         }
 
-      
+
+        [HttpGet]
+        [Route("[action]/{eventId}")]
+
+        public IActionResult Get(int eventId)
+        {
+            try
+            {
+                return Ok(_eventService.GetById(eventId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);  
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]/{eventId}")]
+
+        public IActionResult GetVenues(int eventId)
+        {
+            try
+            {
+                return Ok(_eventService.GetVenues(eventId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpGet]
+        [Route("[action]/{eventId}/{venueId}")]
+        public IActionResult GetRunTimes(int eventId,int venueId)
+        {
+            try
+            {
+                return Ok(_eventService.GetRunTimes(eventId, venueId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
     }
 }

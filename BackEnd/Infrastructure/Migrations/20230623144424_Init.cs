@@ -11,9 +11,6 @@ namespace Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateSequence(
-                name: "EventInstanceSequence");
-
             migrationBuilder.CreateTable(
                 name: "Events",
                 columns: table => new
@@ -45,22 +42,20 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StandingEventInstances",
+                name: "EventsInstances",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [EventInstanceSequence]"),
-                    VenueId = table.Column<int>(type: "int", nullable: false),
-                    AvailableTicketTypes = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    Span_Start = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Span_End = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EventId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StandingEventInstances", x => x.Id);
+                    table.PrimaryKey("PK_EventsInstances", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StandingEventInstances_Venues_VenueId",
-                        column: x => x.VenueId,
-                        principalTable: "Venues",
+                        name: "FK_EventsInstances_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -105,31 +100,37 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StandingReservations",
+                name: "StandingEventInstances",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TicketType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<long>(type: "bigint", nullable: false),
-                    StandingEventInstanceId = table.Column<int>(type: "int", nullable: true),
-                    SerialNumber = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    VenueId = table.Column<int>(type: "int", nullable: false),
+                    AvailableTicketTypes = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Span_Start = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Span_End = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StandingReservations", x => x.Id);
+                    table.PrimaryKey("PK_StandingEventInstances", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StandingReservations_StandingEventInstances_StandingEventInstanceId",
-                        column: x => x.StandingEventInstanceId,
-                        principalTable: "StandingEventInstances",
-                        principalColumn: "Id");
+                        name: "FK_StandingEventInstances_EventsInstances_Id",
+                        column: x => x.Id,
+                        principalTable: "EventsInstances",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StandingEventInstances_Venues_VenueId",
+                        column: x => x.VenueId,
+                        principalTable: "Venues",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "SeatedEventInstances",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [EventInstanceSequence]"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     VenueId = table.Column<int>(type: "int", nullable: false),
                     Span_Start = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Span_End = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -137,6 +138,12 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SeatedEventInstances", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SeatedEventInstances_EventsInstances_Id",
+                        column: x => x.Id,
+                        principalTable: "EventsInstances",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SeatedEventInstances_VenuesWithSeats_VenueId",
                         column: x => x.VenueId,
@@ -162,6 +169,27 @@ namespace Infrastructure.Migrations
                         name: "FK_Seats_VenuesWithSeats_VenueWithSeatsId",
                         column: x => x.VenueWithSeatsId,
                         principalTable: "VenuesWithSeats",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StandingReservations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TicketType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<long>(type: "bigint", nullable: false),
+                    StandingEventInstanceId = table.Column<int>(type: "int", nullable: true),
+                    SerialNumber = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StandingReservations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StandingReservations_StandingEventInstances_StandingEventInstanceId",
+                        column: x => x.StandingEventInstanceId,
+                        principalTable: "StandingEventInstances",
                         principalColumn: "Id");
                 });
 
@@ -209,6 +237,11 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_EventsInstances_EventId",
+                table: "EventsInstances",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SeatedEventInstances_VenueId",
                 table: "SeatedEventInstances",
                 column: "VenueId");
@@ -243,9 +276,6 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Events");
-
-            migrationBuilder.DropTable(
                 name: "SeatSeatedReservation");
 
             migrationBuilder.DropTable(
@@ -267,13 +297,16 @@ namespace Infrastructure.Migrations
                 name: "SeatedEventInstances");
 
             migrationBuilder.DropTable(
+                name: "EventsInstances");
+
+            migrationBuilder.DropTable(
                 name: "VenuesWithSeats");
 
             migrationBuilder.DropTable(
-                name: "Venues");
+                name: "Events");
 
-            migrationBuilder.DropSequence(
-                name: "EventInstanceSequence");
+            migrationBuilder.DropTable(
+                name: "Venues");
         }
     }
 }

@@ -1,12 +1,6 @@
 ﻿using Application.Interfaces;
 using Core.Entities;
 using Core.DTO_s;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.Data;
 using Core.Interfaces;
 
 namespace Application.Services
@@ -18,14 +12,20 @@ namespace Application.Services
         {
             _eventRepository = EventRepository;
         }
-        public Task<Event> GetById(int id)
+        public Event GetById(int id)
         {
-            throw new NotImplementedException();
+            return _eventRepository.GetEvent(id);
         }
 
-        public Task<List<EventInstanceDto>> GetInstances(int eventId, int venueId)
+        public ICollection<EventRunTimesDto> GetRunTimes(int eventId, int venueId)
         {
-            throw new NotImplementedException();
+            return _eventRepository.GetTimeSpans(venueId, eventId);
         }
+
+        public ICollection<SeatedVenueNamesDto> GetVenues(int eventId)
+        {
+            return _eventRepository.GetVenueNames(eventId);
+        }
+ 
     }
 }
