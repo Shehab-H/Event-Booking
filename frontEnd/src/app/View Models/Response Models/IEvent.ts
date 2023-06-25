@@ -1,11 +1,10 @@
-import { IEventIteration } from "./IEventIteration";
-import { IVenue } from "./IVenue";
 
 export interface IEvent {
-  id:number
+  id:number;
   name : string;
+  type :string;
+  backGroundUrl : string;
+  thumbnailUrl: string;
   description : string;
-  backgroundImageUrl : string;
-  posterImageUrl :string;
-  venues:IVenue[]
+  descriptionTitle:string;
 }

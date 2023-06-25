@@ -1,55 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { EventService } from 'src/app/Services/Event.service';
 import { IEvent } from 'src/app/View Models/Response Models/IEvent';
-import { IVenue } from 'src/app/View Models/Response Models/IVenue';
+import {GlobalConfigurationService} from 'src/app/Services/Global-Configuration.service'
+import { SmoothScrollService } from 'src/app/Services/SmoothScroll/SmoothScroll.service';
+
+
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  styleUrls: ['./event.component.css'],
+
 })
-export class EventComponent implements OnInit {
-  event : IEvent;
- _venues : IVenue[];
+export class EventComponent implements OnInit,OnDestroy {
+  eventSubscription!: Subscription;
+  event : IEvent = {
+    id: 0,
+    name: '',
+    type: '',
+    backGroundUrl: '',
+    thumbnailUrl: '',
+    description: '',
+    descriptionTitle:''
+  };
+  articleExpanded:boolean =false;
 
-  showdays:Date[]=[];
-
-  constructor(private eventService: EventService){
-    this.event= eventService.GetEventById(0);
-    this._venues=this.event.venues;
+  constructor(
+    private scroller:SmoothScrollService,
+      private eventService: EventService
+    , private config:GlobalConfigurationService){
   }
-
-  get Venues() : string[]{
-    return this._venues.map(venue =>venue.name);
-  }
-
-
-  getFormattedDates(): string[] {
-    return this.showdays.map(date => date.toLocaleDateString());
-  }
-
-  VenueSelected(newVenue:string){
-    console.log(newVenue);
-    const venue = this.event.venues.find(v=>v.name==newVenue);
-    if(venue){
-      this.eventService.GetEventIterations(this.event.id,venue.id)
-    }
-    else{
-      throw new Error("venue is not available anymore");
-    }
-  }
-
-  ShowDaySelected(newShowDay:string){
-    console.log(newShowDay);
-  }
-
-  ShowTimeSelected(newShowTime:string){
-    console.log(newShowTime);
-  }
-  LoungeSelected(newLounge:string){
-    console.log(newLounge);
-  }
-
 
   ngOnInit(): void {
+    this.eventSubscription = this.eventService.GetEventById(1).subscribe((e)=>{
+      this.event = e
+      this.event.backGroundUrl=`${this.config.ApiUrl}/${this.event.backGroundUrl}`
+    }
+    );
+  }
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
+  }
+  Scroll(el:HTMLElement){
+    this.scroller.smoothScroll(el,600);
+  }
+
+  ExpandArticle(){
+    this.articleExpanded=true;
   }
 }

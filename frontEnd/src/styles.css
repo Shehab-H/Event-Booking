@@ -1,74 +1,70 @@
+@import "~bootstrap/dist/css/bootstrap.css";
 
 html, body { height: 100%; }
 body {
    margin: 0;
-   background-image: linear-gradient(180deg, #f5f7fa 0%, #ecd3e7 90%);
-   background-attachment: fixed;
-   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-   background-size: cover;
+   font-family:'Futura-PT-Bold';
   }
-  .f1-medium{
-    font-family: 'SackersGothicStd-Medium';
+
+  .f-heavy{
+    font-family: 'Futura-PT-Bold';
   }
-  .f1-heavy{
-    font-family: 'SackersGothicStd-Heavy';
-  }
-  .f1-light{
-    font-family: 'SackersGothicStd-Light';
-  }
-  .f2{
-    font-family: 'EngraversGothicBT';
+  .f-light{
+    font-family: 'FuturaCyrillicLight';
   }
   .f-default{
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family:'FuturaCyrillicMedium' ;
+  }
+  .f-book{
+    font-family: 'FuturaCyrillicBook';
   }
 
+
   @font-face {
-    font-family: 'SackersGothicStd-Medium';
-    src: url('assets/SackersGothicStd-Medium.otf') format(truetype);
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'SackersGothicStd-Light';
-    src: url('assets/SackersGothicStd-Light.otf') format(truetype);
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'SackersGothicStd-Heavy';
-    src: url('assets/SackersGothicStd-Heavy.otf') format(truetype);
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'EngraversGothicBT';
-    src: url('assets/EngraversGothicBT.ttf') format(truetype);
+    font-family: 'FrizQuadrataBold';
+    src: url('assets/FrizQuadrataBold.otf') format(truetype);
     font-weight: normal;
     font-style: normal;
   }
 
+  @font-face {
+    font-family: 'Futura-PT-Bold';
+    src: url('assets/Futura-PT-Bold.ttf') format(truetype);
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'FuturaCyrillicBook';
+    src: url('assets/FuturaCyrillicBook.ttf') format(truetype);
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'FuturaCyrillicMedium';
+    src: url('assets/FuturaCyrillicMedium.ttf') format(truetype);
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'FuturaCyrillicLight';
+    src: url('assets/FuturaCyrillicLight.ttf') format(truetype);
+    font-weight: normal;
+    font-style: normal;
+  }
 
 
-
-.txt-gray{
-  color: #515151;
-}
 .txt-white{
   color: #ffffff;
-}
-.txt-purple{
-  color: #a46497;
 }
 .txt-dark{
   color:black;
 }
 
-.bgr-purple{
-  background-color: #a46497;
-  ;
+.bg-clr-yellow{
+  background-color: #fcb933 !important;
 }
 
-.bgr-purple-light{
-  background-color: #ecd3e7;
+.clr-yellow{
+  color: #fcb933;
 }
+

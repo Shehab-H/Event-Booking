@@ -47,6 +47,10 @@ namespace Web
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
+            app.UseCors("AllowSpecifcOrigin");
+
             app.UseAuthorization();
 
             app.MapControllers();
