@@ -9,11 +9,12 @@ namespace Core.Entities
     public class SeatedReservation : Reservation
     {
 
-        public ICollection<Seat> Seats { get; private set;}
+        private ICollection<Seat> _bookedSeats;
+        public IReadOnlyCollection<Seat> BookedSeats => _bookedSeats.ToList().AsReadOnly();
 
         public SeatedReservation(ICollection<Seat> seats) : base()
         {
-            Seats = seats;
+            _bookedSeats = seats;
         }
         private SeatedReservation() { }
     }

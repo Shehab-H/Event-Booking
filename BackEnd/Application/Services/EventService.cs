@@ -22,6 +22,11 @@ namespace Application.Services
             return _eventRepository.GetTimeSpans(venueId, eventId);
         }
 
+        public SeatsDto GetSeats(int eventInstanceId)
+        {
+            return _eventRepository.GetSeats(eventInstanceId);
+        }
+
         public ICollection<SeatedVenueNamesDto> GetVenues(int eventId)
         {
             return _eventRepository.GetVenueNames(eventId);

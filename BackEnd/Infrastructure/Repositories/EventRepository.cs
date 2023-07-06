@@ -21,7 +21,9 @@ namespace Infrastructure.Repositories
         {
             var instance = _bookingDbContext.SeatedEventInstances.
                  Include(i => i.Venue).ThenInclude(v => v.Seats)
-                 .Include(i => i.Reservations).SingleOrDefault(i => i.Id == id);
+                 .Include(i => i.Reservations)
+                 .ThenInclude(r=>r.BookedSeats)
+                 .SingleOrDefault(i => i.Id == id);
             if (instance == null)
                 throw new Exception("event instance was not found");
 
@@ -71,6 +73,7 @@ namespace Infrastructure.Repositories
                 .AsNoTracking().
                 Where(i => i.EventId == eventId && i.VenueId == venueId)
                .MapToDto()
+               .AsNoTracking()
                .ToList();
 
             if (runTimes == null)
@@ -88,9 +91,40 @@ namespace Infrastructure.Repositories
                 .SeatedEventInstances
                 .Where(e => e.EventId == eventId)
                 .MapToSeatedVenueDto()
+                .Distinct()
+                .AsNoTracking()
                 .ToList();
 
             return venues;
+        }
+
+        public SeatsDto GetSeats(int eventIterationId)
+        {
+            var seats = _bookingDbContext
+                .SeatedEventInstances
+                .Where(i => i.Id == eventIterationId)
+                .Select(i => new SeatsDto(i.Venue.Seats.ToList()
+                ,i.Reservations.SelectMany(r=>r.BookedSeats).ToList()
+                ))
+                .AsNoTracking()
+                .SingleOrDefault();
+
+            if (seats == null)
+            {
+                throw new Exception("seats was not found");
+            }
+            
+            return new SeatsDto(seats.AvailableSeats.Except(seats.ReservedSeats).ToList(),seats.ReservedSeats);
+        }
+
+        public Reservation GetReservation(Guid serialNumer)
+        {
+           var reservations = _bookingDbContext.Reservations.SingleOrDefault(r=>r.SerialNumber == serialNumer);
+           if(reservations == null)
+            {
+                throw new Exception("reservation not found");
+            }
+           return reservations;
         }
     }
 }

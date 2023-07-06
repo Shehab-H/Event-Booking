@@ -8,5 +8,7 @@ namespace Application.Interfaces
        public Event GetById(int id);
        public ICollection<EventRunTimesDto> GetRunTimes(int eventId, int venueId);
        public ICollection<SeatedVenueNamesDto> GetVenues(int eventId);
+
+       public SeatsDto GetSeats(int eventInstanceId);
     }
 }

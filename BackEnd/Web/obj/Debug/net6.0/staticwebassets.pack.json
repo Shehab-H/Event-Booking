@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\godfather.jpg",
+      "PackagePath": "staticwebassets\\godfather.jpg"
+    },
+    {
       "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\shawshank.jpg",
       "PackagePath": "staticwebassets\\shawshank.jpg"
     },

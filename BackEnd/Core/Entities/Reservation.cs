@@ -15,6 +15,6 @@ namespace Core.Entities
         {
             SerialNumber = Guid.NewGuid();
         }
-
+     
     }
 }

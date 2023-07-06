@@ -3,7 +3,6 @@ using Application.Services;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 namespace Web

@@ -18,6 +18,7 @@ namespace Infrastructure.Data
         public DbSet<StandingEventInstance> StandingEventInstances { get; set; }
         public DbSet<SeatedEventInstance> SeatedEventInstances { get; set; }
 
+        public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Venue> Venues { get; set;}
         public DbSet<VenueWithSeats> VenuesWithSeats { get; set; }
 
@@ -40,13 +41,20 @@ namespace Infrastructure.Data
 
             });
 
+            modelBuilder.Entity<Reservation>(i =>
+            {
+                i.UseTptMappingStrategy();
+
+            });
+
+            modelBuilder.Entity<SeatedReservation>().HasMany(i=>i.BookedSeats).WithMany();
+
             modelBuilder.Entity<SeatedEventInstance>().Ignore(e => e.AllReservedSeats);
 
             modelBuilder.Entity<VenueWithSeats>().HasMany(v => v.Seats).WithOne();
 
             modelBuilder.Entity<Venue>().OwnsMany(v => v.BookedSlots);
 
-            modelBuilder.Entity<SeatedReservation>().HasMany(s => s.Seats).WithMany();
 
             modelBuilder.Entity<StandingEventInstance>().
                 Property(e => e.AvailableTicketTypes).

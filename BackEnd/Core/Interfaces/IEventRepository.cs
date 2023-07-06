@@ -14,8 +14,9 @@ namespace Core.Interfaces
         public SeatedEventInstance GetSeatedInstance(int id);
         public StandingEventInstance GetStandingInstance(int id);
 
+        public Reservation GetReservation(Guid serialNumer);
+        public SeatsDto GetSeats(int eventIterationId);
         public ICollection<Seat> GetSeats(ICollection<int> seatIds);
-
         public int SaveChanges();
 
         public ICollection<EventRunTimesDto> GetTimeSpans(int venueId, int eventId);

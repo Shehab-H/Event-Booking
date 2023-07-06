@@ -11,9 +11,8 @@ namespace Core.Entities
     {
         private ICollection<Seat> _seats;
 
-        public IReadOnlyCollection<Seat> Seats => _seats.ToList();
+        public IReadOnlyCollection<Seat> Seats => _seats.ToList().AsReadOnly();
         public string Lounge { get; private set; }
-
 
         public VenueWithSeats(string name , ICollection<Seat> seats, string lounge) : base(name)
         {
@@ -31,7 +30,7 @@ namespace Core.Entities
         /// </summary>
         /// <param name="seats"></param>
         /// <returns>true or false</returns>
-        public bool HasSeats(ICollection<Seat> seats)
+        public bool HasSeats(IReadOnlyCollection<Seat> seats)
         {
             return !seats.Select(s => s.Id).Except(_seats.Select(s => s.Id)).Any();
         }

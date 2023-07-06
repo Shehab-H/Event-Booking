@@ -17,20 +17,24 @@ namespace Application.Services
     {
         private readonly  IEventRepository _eventRepository;
 
-        public BookingService(IEventRepository eventRepository)
+        public BookingService(IEventRepository eventRepositor)
         {
-            _eventRepository = eventRepository;
+            _eventRepository = eventRepositor;
         }
-        public  void Book(int eventInstanceId,string ticketType,uint quantity)
+        public void Book(int eventInstanceId,string ticketType,uint quantity)
         {
+            var reservation = new StandingReservation(ticketType, quantity);
+
+
             var instance = _eventRepository.GetStandingInstance(eventInstanceId);
 
+            instance.MakeReservation(reservation);
 
-            instance.MakeReservation(new StandingReservation(ticketType, quantity));
+            _eventRepository.SaveChanges();
 
         }
 
-        public void Book(int eventInstanceId, ICollection<int> seatIds)
+        public  void Book(int eventInstanceId, ICollection<int> seatIds)
         {
             var seats = _eventRepository.GetSeats(seatIds);
 
@@ -43,10 +47,13 @@ namespace Application.Services
             {
                 throw new Exception($"some of the seats doesn't exist");
             }
+            var reservation = new SeatedReservation(seats);
 
-            instance.MakeReservation(new SeatedReservation(seats));
+
+            instance.MakeReservation(reservation);
 
             _eventRepository.SaveChanges();
+
         }
 
 

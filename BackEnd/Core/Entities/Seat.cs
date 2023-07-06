@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public sealed class Seat
+    public sealed class Seat : IEquatable<Seat>
     {
         public int Id { get; private set; }
         public char Row { get;private set; }
@@ -17,6 +17,15 @@ namespace Core.Entities
         {
             Row = row;
             Number = number;
+        }
+
+        public bool Equals(Seat? other)
+        {
+            return Id == other?.Id && Row==other.Row && Number==other.Number;
+        }
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode()^Row.GetHashCode()^Number.GetHashCode();
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Application.Interfaces
     public interface IbookingService
     {
         public void Book(int eventInstanceId, ICollection<int> seatIds);
-        public void Book(int eventInstanceID, string ticketType , uint quantity);
+        public void  Book(int eventInstanceID, string ticketType , uint quantity);
+
+        //public CaptureOrderResponse ConfirmReservation(Guid reservationSerial);
     }
 }
