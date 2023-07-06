@@ -1,0 +1,9 @@
+.lds-ellipsis{
+position: relative;
+left: 0%;
+top: 0%;
+}
+
+#payment{
+  background-color: black;
+}

@@ -1,0 +1,24 @@
+<div class="select-box">
+  <div class="select-box__current" tabindex="1">
+    <div class="select-box__value">
+      <input class="select-box__input" type="radio" [id]="placeholderUniqueID"  [name]="radioGroupName" checked="checked"/>
+      <p class="select-box__input-text">{{placeholder}}</p>
+    </div>
+    <div *ngFor="let option of options; let i = index;" class="select-box__value">
+      <input class="select-box__input" type="radio" [id]="identifiers[i]" [name]="radioGroupName"/>
+      <p class="select-box__input-text">{{option}}</p>
+    </div>
+    <img class="select-box__icon" src="http://cdn.onlinewebfonts.com/svg/img_295694.svg" alt="Arrow Icon" aria-hidden="true"/>
+  </div>
+  <ul class="select-box__list">
+    <li>
+      <label class="select-box__option" for="0" aria-hidden="aria-hidden">{{placeholder}}</label>
+    </li>
+    <li *ngFor="let option of options;let i =index" >
+      <label (click)="onSelectionChange(option)" class="select-box__option" [for]="identifiers[i]" aria-hidden="aria-hidden">{{option}}</label>
+    </li>
+  </ul>
+</div>
+
+
+

@@ -1,0 +1,43 @@
+
+<div class="w-100 bg-dark p-5" style="color: white;overflow: hidden;position: relative;height: 600px;">
+  <!-- loader -->
+  <div *ngIf="loading" class="lds-ellipsis">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <!-- end of loader -->
+  <div *ngIf="!loading" class="venue-container w-100 h-100" style="transform-origin:center;" cdkDrag
+    [style.transform]="'scale('+scale+')'" (cdkDragMoved)="onDragReleased($event)"
+    (cdkDragStarted)="onDragStarted($event)" (cdkDragMoved)="onDragReleased($event)">
+    <div class="seating-screen mx-auto ">
+    </div>
+    <div class="d-flex justify-content-center f-light mb-4">
+      <span>SCREEN</span>
+    </div>
+    <div class="p-5" [style.transform]="'scale('+20.35/largestSeatCount+')'" style="transform-origin: 0 0;" class="">
+      <div *ngFor="let row of alphabet  " class="d-flex flex-row">
+
+        <div *ngIf="seatsByRow[row]==null" class="seat non-existent"></div>
+
+        <div *ngFor="let seat of seatsByRow[row]" class="m-1">
+          <div [ngClass]="{'selected': isSelected(seat)}" (click)="seatSelected(seat)" class="seat available f-default"
+            [pTooltip]="'Row : '+seat.row +'\n'+'Number : '+seat.number.toString()" tooltipPosition="top"
+            *ngIf="seat.available"></div>
+          <div class="seat non-available" *ngIf="!seat.available&&seat.number>0"></div>
+          <div class="seat non-existent" *ngIf="!seat.available&&seat.number==-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position: relative;bottom: 90px;height:90px" class=" d-flex justify-content-between p-4 align-items-end">
+  <div>
+    <button (click)="scaleUp()">+</button>
+    <button (click)="scaleDown()">-</button>
+    <button (click)="reset()">reset</button>
+  </div>
+  <button (click)="makeReservation()" *ngIf="selectedSeats.length>0" class="cstm-btn">NEXT</button>
+</div>

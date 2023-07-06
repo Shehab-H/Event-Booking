@@ -1,0 +1,45 @@
+
+<div  class="bg-black w-100 d-flex align-items-center justify-content-center" style="position: relative; height: fit-content;">
+  <div *ngIf="loading" class="lds-ellipsis">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div  *ngIf="!loading" class="p-4 w-100 h-100">
+    <div style="color: #fcb933;" class="d-flex justify-content-center mt-3 mb-5">
+      <h2>SHOW TIMES</h2>
+    </div>
+    <div class="row mx-auto container w-100 " style="right: 0;height: 80%;">
+      <div class="f-heavy col-lg-6 text-white mb-5">
+        <h2>
+          {{event.name | uppercase}}
+        </h2>
+        <div class="mt-5 w-100">
+          <span class="p-float-label">
+            <p-dropdown [filter]="true" filterBy="name" [(ngModel)]="selectedVenue" (ngModelChange)="venueChanged()" inputId="float-label"
+              placeholder="Select a Venue" [options]="venues" optionLabel="name"></p-dropdown>
+            <label class="f-book" for="float-label">Select a Venue</label>
+          </span>
+        </div>
+        <div class="mt-5">
+          <p-tabMenu (activeItemChange)="dateChanged($event)" [(activeItem)]="selectedShowDay" [scrollable]="true"
+            [model]="showDaysItems">
+          </p-tabMenu>
+        </div>
+        <div class="mt-5">
+          <p-tabMenu [scrollable]="true" (activeItemChange)="setSelectedShowTime($event)"
+            [(activeItem)]="selectedShowTime" [model]="showTimesItems">
+          </p-tabMenu>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <Seatings [eventiterationId]="currentEventIteration?.eventInstanceId"></Seatings>
+      </div>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,44 @@
+.seating-screen{
+  border: none;
+  border-top: 8px solid rgba(255,255,255,0.6);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  width: 70%;
+  height: 5%;
+}
+
+@media(max-width:1400px) and (min-width:992px){
+  .seating-screen{
+    width: 150%;
+  }
+}
+.seat {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+}
+
+.available{
+  background-color: white;
+  cursor: pointer;
+}
+
+
+.available:hover{
+  background-color: #fcb933 ;
+}
+
+.non-available{
+  background-color: rgba(124, 124, 124, 0.6);
+}
+
+.non-existent{
+  background-color: transparent;
+}
+.venue-container{
+  cursor: move;
+}
+
+.selected{
+  background-color: #fcb933 ;
+}

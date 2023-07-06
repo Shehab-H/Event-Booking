@@ -1,0 +1,64 @@
+
+#bgimg{
+  object-fit:cover;
+  height: 100% !important;
+  width: 100%;
+}
+
+#buy-now-container button {
+  border: none;
+  border-radius: 4px;
+}
+
+#read-more button{
+  color: black;
+  border-radius: 4px;
+  background-color:transparent !important;
+}
+#read-more button:hover{
+  background-color:#fcb933 !important;
+}
+
+#buy-now-container {
+  background-color: black;
+  display: flex;
+  align-items: center;
+}
+
+#event-name{
+  display: inline-block;
+  font-size: xx-large;
+  margin-right: 30px;
+  color: white;
+}
+
+#buy-now-container button:hover {
+  color:#fcb933 ;
+  background-color: transparent !important;
+  border: 2px solid #fcb933 !important;
+}
+#buy-now-container button{
+  color: black;
+}
+
+#event-Info{
+  margin-top: 80px;
+}
+
+#discription-container{
+  width: 700px;
+  font-size:24px;
+}
+
+@media(max-width:768px){
+  #bg-img-container{
+    height: 50% !important;
+  }
+  #discription-container{
+    width:100%;
+  }
+}
+
+.article{
+  font-size: 1.3rem !important;
+}

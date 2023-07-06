@@ -1,0 +1,59 @@
+nav .logo {
+  color: #ffac07 !important;
+  text-shadow: 1px 1px #FF0000;
+  text-decoration: none;
+  font-size: x-large !important;
+}
+nav .link {
+  color: #ffffff !important;
+  font-family:'Futura-PT-Bold';
+  text-decoration: none;
+  font-size: large !important;
+}
+
+
+nav .link:hover {
+  color: #ffac07 !important;
+}
+
+@media(max-width:1080px) and (min-width:768px){
+  nav .logo {
+    font-size: large !important;
+  }
+  nav .link {
+    font-size: small !important;
+  }
+}
+
+
+@media(max-width:768px){
+  nav{
+    background-color: #ffc041 !important;
+    padding: 0px !important;
+  }
+  nav .link {
+    display: none;
+  }
+  nav .logo{
+    color: black !important;
+    text-shadow: none;
+    font-size: medium !important;
+  }
+  #search-container{
+    display: block !important;
+    width: 100%;
+  }
+
+}
+
+nav  a{
+      margin-left: 40px;
+      display: flex;
+      align-items: center;
+}
+
+nav{
+  padding: 10px;
+  height: fit-content;
+  background-color: black;
+}
