@@ -5,6 +5,8 @@ using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories
 {
@@ -17,44 +19,9 @@ namespace Infrastructure.Repositories
             _bookingDbContext = dbContext;
         }
 
-        public SeatedEventInstance GetSeatedInstance(int id)
-        {
-            var instance = _bookingDbContext.SeatedEventInstances.
-                 Include(i => i.Venue).ThenInclude(v => v.Seats)
-                 .Include(i => i.Reservations)
-                 .ThenInclude(r=>r.BookedSeats)
-                 .SingleOrDefault(i => i.Id == id);
-            if (instance == null)
-                throw new Exception("event instance was not found");
-
-            return instance;
-
-        }
-
-        public StandingEventInstance GetStandingInstance(int id)
-        {
-            var instance = _bookingDbContext.StandingEventInstances
-                 .Include(i => i.Reservations).
-                 SingleOrDefault(i => i.Id == id);
-
-            if (instance == null)
-                throw new Exception("event instance was not found");
-
-            return instance;
-        }
-
         public int SaveChanges()
         {
            return _bookingDbContext.SaveChanges();
-        }
-
-        public ICollection<Seat> GetSeats(ICollection<int> seatIds)
-        {
-
-            var seats = _bookingDbContext.Seats.Where(s => seatIds.Contains(s.Id)).ToList();
-
-            return seats;
-
         }
 
         public Event GetEvent(int id)
@@ -67,23 +34,18 @@ namespace Infrastructure.Repositories
             return @event;
         }
 
-        public ICollection<EventRunTimesDto> GetTimeSpans(int venueId, int eventId)
+        public async Task<ICollection<Event>> GetByDateRange(TimeRange Range)
         {
-            var runTimes = _bookingDbContext.SeatedEventInstances
-                .AsNoTracking().
-                Where(i => i.EventId == eventId && i.VenueId == venueId)
-               .MapToDto()
-               .AsNoTracking()
-               .ToList();
-
-            if (runTimes == null)
-            {
-                throw new Exception($"there are no instances running in the venue with" +
-                    $" id : {venueId} and event id : {venueId}");
-            }
-
-            return runTimes;
+            var events = await _bookingDbContext.EventsInstances
+                .Where(i => i.Span.Start > Range.Start && i.Span.Start < Range.End)
+                .Select(i => i.Event)
+                .Distinct()
+                .AsNoTracking()
+                .ToListAsync();
+            return events;
         }
+
+
 
         public ICollection<SeatedVenueNamesDto> GetVenueNames(int eventId)
         {
@@ -98,33 +60,39 @@ namespace Infrastructure.Repositories
             return venues;
         }
 
-        public SeatsDto GetSeats(int eventIterationId)
-        {
-            var seats = _bookingDbContext
-                .SeatedEventInstances
-                .Where(i => i.Id == eventIterationId)
-                .Select(i => new SeatsDto(i.Venue.Seats.ToList()
-                ,i.Reservations.SelectMany(r=>r.BookedSeats).ToList()
-                ))
-                .AsNoTracking()
-                .SingleOrDefault();
-
-            if (seats == null)
-            {
-                throw new Exception("seats was not found");
-            }
-            
-            return new SeatsDto(seats.AvailableSeats.Except(seats.ReservedSeats).ToList(),seats.ReservedSeats);
-        }
-
         public Reservation GetReservation(Guid serialNumer)
         {
-           var reservations = _bookingDbContext.Reservations.SingleOrDefault(r=>r.SerialNumber == serialNumer);
+           var reservations = _bookingDbContext
+                .Reservations.
+                AsNoTracking().
+                SingleOrDefault(r=>r.SerialNumber == serialNumer);
            if(reservations == null)
             {
                 throw new Exception("reservation not found");
             }
            return reservations;
+        }
+
+        public  async Task<ICollection<Event>> GetTrendingEvents( int take = 10)
+        {
+            var events = await  _bookingDbContext
+                .SeatedEventInstances
+                .Where(i => i.Reservations
+                .Where(r => r.DateCreated >= DateTime.Now.AddDays(-3)).Any())
+                .OrderByDescending(i => i.Reservations.SelectMany(r => r.BookedSeats).Count())
+                .Distinct()
+                .Select(i => i.Event)
+                .Concat(
+                    _bookingDbContext
+                    .StandingEventInstances
+                    .Where(i => i.Reservations
+                         .Where(r => r.DateCreated >= DateTime.Now.AddDays(-3)).Any())
+                    .OrderByDescending(i => i.Reservations.Select(r => r.Quantity).Sum())
+                    .Distinct()
+                    .Select(i => i.Event)
+                ).Take(10).ToListAsync();
+              
+            return events;
         }
     }
 }

@@ -300,3 +300,5 @@ C:\Users\HFCS\Desktop\Study projects\Event-Booking\BackEnd\Web\obj\Debug\net6.0\
 C:\Users\HFCS\Desktop\Study projects\Event-Booking\BackEnd\Web\obj\Debug\net6.0\ref\Web.dll
 C:\Users\HFCS\Desktop\Study projects\Event-Booking\BackEnd\Web\bin\Debug\net6.0\Bogus.dll
 C:\Users\HFCS\Desktop\Study projects\Event-Booking\BackEnd\Web\bin\Debug\net6.0\Web.staticwebassets.runtime.json
+C:\Users\HFCS\Desktop\Study projects\Event-Booking\BackEnd\Web\bin\Debug\net6.0\MediatR.dll
+C:\Users\HFCS\Desktop\Study projects\Event-Booking\BackEnd\Web\bin\Debug\net6.0\MediatR.Contracts.dll

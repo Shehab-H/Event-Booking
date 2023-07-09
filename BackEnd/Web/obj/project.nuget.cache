@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "eeggqReZgT/2/i9SOWBG8i0VTo9OMcseWIqRnHKQm5Ql/n4+1L+rLkQieZ3hAVb9HENkfq3tFY1UA9Wx/QWgfw==",
+  "dgSpecHash": "DpNSUQNMQjkiVLchwJj31pzepgVxabCL/9TI5X0j+Uihe9v1fUQxJZdfZeBG1UH69JLqwfjGP0tCxRP6r6JQLg==",
   "success": true,
   "projectFilePath": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\Web.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\HFCS\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\HFCS\\.nuget\\packages\\mediatr\\12.1.0\\mediatr.12.1.0.nupkg.sha512",
+    "C:\\Users\\HFCS\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\microsoft.aspnet.webapi.client\\4.0.20710\\microsoft.aspnet.webapi.client.4.0.20710.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\microsoft.aspnet.webapi.core\\4.0.20710\\microsoft.aspnet.webapi.core.4.0.20710.nupkg.sha512",
     "C:\\Users\\HFCS\\.nuget\\packages\\microsoft.aspnet.webapi.webhost\\4.0.20710\\microsoft.aspnet.webapi.webhost.4.0.20710.nupkg.sha512",

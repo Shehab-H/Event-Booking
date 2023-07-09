@@ -10,8 +10,8 @@ namespace Core.Entities
     {
         public string TicketType { get; private set; }
 
-        public uint Quantity { get; private set; }
-        public StandingReservation(string ticketType, uint quantity) : base()
+        public int Quantity { get; private set; }
+        public StandingReservation(string ticketType, int quantity) : base()
         {
             this.TicketType = ticketType;
             this.Quantity = quantity;

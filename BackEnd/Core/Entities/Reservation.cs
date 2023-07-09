@@ -11,8 +11,10 @@ namespace Core.Entities
         public int Id { get; set; }
         public Guid SerialNumber { get; private set; }
 
+        public DateTime DateCreated { get;private set; }
         public Reservation()
         {
+            DateCreated=DateTime.Now;
             SerialNumber = Guid.NewGuid();
         }
      

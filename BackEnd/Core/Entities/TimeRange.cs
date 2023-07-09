@@ -31,5 +31,10 @@ namespace Core.Entities
         {
             return other?.Start==Start && other.End==End;
         }
+
+        public override int GetHashCode()
+        {
+          return  base.GetHashCode()^Start.GetHashCode()^End.GetHashCode();
+        }
     }
 }

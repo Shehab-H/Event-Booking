@@ -60,7 +60,7 @@ namespace Infrastructure.Data
                 Property(e => e.AvailableTicketTypes).
                 HasConversion(
                 a => JsonConvert.SerializeObject(a),
-                json => JsonConvert.DeserializeObject<Dictionary<string, uint>>(json)).
+                json => JsonConvert.DeserializeObject<Dictionary<string, int>>(json)).
                 HasColumnType("nvarchar(100)");
 
             modelBuilder.Entity<Venue>().ToTable("Venues");

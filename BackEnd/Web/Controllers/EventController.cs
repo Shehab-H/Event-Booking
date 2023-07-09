@@ -1,7 +1,8 @@
-﻿using Application.Interfaces;
-using Application.Services;
+﻿using Application.Commands;
+using Application.Queries;
 using Core.Entities;
 using Infrastructure.Data;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -11,18 +12,15 @@ namespace Web.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        private readonly IbookingService _bookingService;
-        private readonly IEventService _eventService;
+        private readonly IMediator _mediator;
+
         private readonly BookingDbContext _bookingDbContext;
         
-        public EventController(IbookingService bookingService 
-            , BookingDbContext bookingDbContext 
-            , IEventService eventService
-            )
+        public EventController( BookingDbContext bookingDbContext 
+            ,IMediator mediator)
         {
-            _eventService = eventService;
+            _mediator = mediator;
             _bookingDbContext = bookingDbContext;
-            _bookingService = bookingService;
         }
 
         #region seed data
@@ -95,27 +93,28 @@ namespace Web.Controllers
         [HttpPatch]
         [Route("[action]/{instanceId}/{ticketType}/{quantity}")]
 
-        public IActionResult Book(int instanceId,string ticketType,uint quantity)
+        public async Task<IActionResult> Book(int instanceId,string ticketType,int quantity)
         {
             try
             {
-                _bookingService.Book(instanceId, ticketType, quantity);
+                await _mediator.Send(new BookEventByTypeCommand(instanceId, ticketType, quantity));
+                return Ok();
+
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            return Ok();
         }
 
         [HttpPatch]
         [Route("[action]/{instanceId}/")]
 
-        public  IActionResult Book(int instanceId,[FromBody]ICollection<int> seatIds)
+        public async Task<IActionResult> Book(int instanceId,[FromBody]ICollection<int> seatIds)
         {
             try
             {
-                _bookingService.Book(instanceId, seatIds);
+                await _mediator.Send(new BookEventBySeatsCommand(instanceId, seatIds));
                 return Ok();
             }
             catch (Exception ex)
@@ -124,16 +123,24 @@ namespace Web.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("[action]/{start}/{end}")]
 
+        public async Task<IActionResult> Get(DateTime start, DateTime end, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetEventsByDateRangeQuery(new TimeRange(start, end)), cancellationToken);
+            return Ok(response);
+        }
 
         [HttpGet]
         [Route("[action]/{eventId}")]
 
-        public IActionResult Get(int eventId)
+        public async Task<IActionResult> Get(int eventId)
         {
             try
             {
-                return Ok(_eventService.GetById(eventId));
+                var @event = await  _mediator.Send(new GetEventByIdQuery(eventId));
+                return Ok(@event);
             }
             catch (Exception e)
             {
@@ -144,11 +151,12 @@ namespace Web.Controllers
         [HttpGet]
         [Route("[action]/{eventId}")]
 
-        public IActionResult GetVenues(int eventId)
+        public async Task<IActionResult> GetVenues(int eventId)
         {
             try
             {
-                return Ok(_eventService.GetVenues(eventId));
+               var venues = await _mediator.Send(new GetVenuesQuery(eventId));
+                return Ok(venues);
             }
             catch (Exception e)
             {
@@ -157,11 +165,12 @@ namespace Web.Controllers
         }
         [HttpGet]
         [Route("[action]/{eventId}/{venueId}")]
-        public IActionResult GetRunTimes(int eventId,int venueId)
+        public async Task<IActionResult> GetRunTimes(int eventId,int venueId)
         {
             try
             {
-                return Ok(_eventService.GetRunTimes(eventId, venueId));
+                var runtimes = await _mediator.Send(new GetEventRunTimesQuery(eventId, venueId));
+                return Ok(runtimes);
             }
             catch (Exception e)
             {
@@ -171,12 +180,32 @@ namespace Web.Controllers
 
         [HttpGet]
         [Route("[action]/{eventInstanceId}")]
-        public IActionResult GetSeats(int eventInstanceId)
+        public async Task<IActionResult> GetSeats(int eventInstanceId)
         {
-      
-                return Ok(_eventService.GetSeats(eventInstanceId));
+            try
+            {
+                var seats = await _mediator.Send(new GetSeatsQuery(eventInstanceId));
+                return Ok(seats);
+            }
+            catch(Exception e)
+            {
+                return BadRequest();
+            }
+        }
 
-           
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetTrendingEvents()
+        {
+            try
+            {
+                var events = await _mediator.Send(new GetTrendingEventsQuery());
+                return Ok(events);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

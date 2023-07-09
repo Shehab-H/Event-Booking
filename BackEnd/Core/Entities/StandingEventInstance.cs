@@ -15,8 +15,8 @@ namespace Core.Entities
         private ICollection<StandingReservation> _reservations;
         public IReadOnlyCollection<StandingReservation> Reservations => _reservations.ToList();
 
-        private IDictionary<string, uint> _availableTicketTypes;
-        public IReadOnlyDictionary<string, uint> AvailableTicketTypes => new Dictionary<string, uint>(_availableTicketTypes);
+        private IDictionary<string, int> _availableTicketTypes;
+        public IReadOnlyDictionary<string, int> AvailableTicketTypes => new Dictionary<string, int>(_availableTicketTypes);
 
         public StandingEventInstance(int venueId, TimeRange span,int eventId) : base(span, eventId)
         {

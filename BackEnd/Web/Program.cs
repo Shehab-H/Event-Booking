@@ -1,5 +1,4 @@
-using Application.Interfaces;
-using Application.Services;
+using Application.Queries;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
@@ -21,9 +20,11 @@ namespace Web
 
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<IbookingService, BookingService>();
-            builder.Services.AddScoped<IEventService, EventService>();
+            builder.Services.AddScoped<IEventInstancesRepository, EventInstancesRepository>();
+            builder.Services.AddScoped<ISeatsRepository, SeatsRepository>();
             builder.Services.AddScoped<IEventRepository, EventRepository>();
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetEventsByDateRangeQuery).Assembly));
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(name: "AllowSpecifcOrigin",

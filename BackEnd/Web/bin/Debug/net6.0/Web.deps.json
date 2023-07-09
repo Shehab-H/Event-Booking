@@ -11,6 +11,7 @@
           "Application": "1.0.0",
           "Bogus": "34.0.2",
           "Infrastructure": "1.0.0",
+          "MediatR": "12.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.4",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.4",
           "Swashbuckle": "5.6.0",
@@ -68,6 +69,26 @@
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "MediatR/12.1.0": {
+        "dependencies": {
+          "MediatR.Contracts": "2.0.1",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/MediatR.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.1.0.0"
+          }
+        }
+      },
+      "MediatR.Contracts/2.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/MediatR.Contracts.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.0"
           }
         }
       },
@@ -844,7 +865,8 @@
       "Application/1.0.0": {
         "dependencies": {
           "Core": "1.0.0",
-          "Infrastructure": "1.0.0"
+          "Infrastructure": "1.0.0",
+          "MediatR": "12.1.0"
         },
         "runtime": {
           "Application.dll": {}
@@ -900,6 +922,20 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "MediatR/12.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-J7L7shGumCxXvRvrNADH/XbbbF7fStNBWlvyugZaWMVdSeE/L47pPXWJzZRl/JbUjjospOu7xz3n7qH1VzHl5g==",
+      "path": "mediatr/12.1.0",
+      "hashPath": "mediatr.12.1.0.nupkg.sha512"
+    },
+    "MediatR.Contracts/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FYv95bNT4UwcNA+G/J1oX5OpRiSUxteXaUt2BJbRSdRNiIUNbggJF69wy6mnk2wYToaanpdXZdCwVylt96MpwQ==",
+      "path": "mediatr.contracts/2.0.1",
+      "hashPath": "mediatr.contracts.2.0.1.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/4.0.20710": {
       "type": "package",

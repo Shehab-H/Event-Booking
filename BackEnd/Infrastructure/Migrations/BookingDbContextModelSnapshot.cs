@@ -87,6 +87,9 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("SerialNumber")
                         .HasColumnType("uniqueidentifier");
 
@@ -200,8 +203,8 @@ namespace Infrastructure.Migrations
                 {
                     b.HasBaseType("Core.Entities.Reservation");
 
-                    b.Property<long>("Quantity")
-                        .HasColumnType("bigint");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<int?>("StandingEventInstanceId")
                         .HasColumnType("int");
