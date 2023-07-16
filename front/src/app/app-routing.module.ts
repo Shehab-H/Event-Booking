@@ -4,6 +4,9 @@ import { PaymentComponent } from './Components/Payment/Payment.component';
 import { ErrorComponent } from './Components/Error/Error.component';
 
 const routes: Routes = [
+  {
+    path:'', loadChildren:()=> import('./Modules/home/home.module').then(m=>m.HomeModule)
+  },
   {path:'event/:id',
   loadChildren:()=> import('./Modules/event-booking/event-booking.module').then(m=>m.EventBookingModule)},
   {
@@ -11,9 +14,6 @@ const routes: Routes = [
   },
   {
     path:'error' , component:ErrorComponent
-  },
-  {
-    path:'', loadChildren:()=> import('./Modules/home/home.module').then(m=>m.HomeModule)
   }
 ];
 @NgModule({

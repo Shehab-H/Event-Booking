@@ -1,12 +1,60 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\2001.webp",
+      "PackagePath": "staticwebassets\\2001.webp"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\The-Thin-Red-Line.webp",
+      "PackagePath": "staticwebassets\\The-Thin-Red-Line.webp"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\asteroid-city.jpg",
+      "PackagePath": "staticwebassets\\asteroid-city.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\breathless.jpeg",
+      "PackagePath": "staticwebassets\\breathless.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\drive.webp",
+      "PackagePath": "staticwebassets\\drive.webp"
+    },
+    {
       "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\godfather.jpg",
       "PackagePath": "staticwebassets\\godfather.jpg"
     },
     {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\in-brugs.webp",
+      "PackagePath": "staticwebassets\\in-brugs.webp"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\lives-of-others.jpg",
+      "PackagePath": "staticwebassets\\lives-of-others.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\memories-of-murder.jpg",
+      "PackagePath": "staticwebassets\\memories-of-murder.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\ordet.jpg",
+      "PackagePath": "staticwebassets\\ordet.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\ran.jpg",
+      "PackagePath": "staticwebassets\\ran.jpg"
+    },
+    {
       "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\shawshank.jpg",
       "PackagePath": "staticwebassets\\shawshank.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\silence.jpg",
+      "PackagePath": "staticwebassets\\silence.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\star-wars.jpeg",
+      "PackagePath": "staticwebassets\\star-wars.jpeg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Web.Microsoft.AspNetCore.StaticWebAssets.props",

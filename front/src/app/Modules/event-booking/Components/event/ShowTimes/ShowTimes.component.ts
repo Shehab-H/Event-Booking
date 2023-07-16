@@ -4,14 +4,12 @@ import { IEvent } from 'src/app/View Models/Response Models/IEvent';
 import { IShowTime } from 'src/app/View Models/Response Models/IShowTime';
 import { IVenue } from 'src/app/View Models/Response Models/IVenue';
 import { MenuItem } from 'primeng/api';
-import { DayDatePipe } from 'src/app/Pipes/day-date/day-date.pipe';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'ShowTimes',
   templateUrl: './ShowTimes.component.html',
   styleUrls: ['./ShowTimes.component.css'],
-  providers: [DayDatePipe],
 })
 export class ShowTimesComponent implements OnInit ,OnChanges{
 

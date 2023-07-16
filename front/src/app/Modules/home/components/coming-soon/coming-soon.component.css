@@ -1,0 +1,15 @@
+#bg-img-container img{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.name-container{
+  transform: translateY(-125px);
+  color: white;
+}
+
+#coming-soon{
+  transform: translateY(-140px);
+  color: black;
+}

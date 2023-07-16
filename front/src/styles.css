@@ -74,6 +74,9 @@ body {
   .clr-yellow{
     color: #fcb933;
   }
+  .bg-yellow{
+    background-color: #fcb933;
+  }
 
   .cstm-btn{
     background-color: #fcb933;
@@ -166,4 +169,8 @@ body {
     100% {
       transform: translate(24px, 0);
     }
+  }
+
+  ::ng-deep .p-galleria-item-container{
+    height: 75% !important;
   }

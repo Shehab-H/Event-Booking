@@ -1,11 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
-
+import { RouterModule, Routes } from '@angular/router';
+import { TrendingEventsComponent } from './components/trending-events/trending-events.component';
+import { SliderComponent } from './components/slider/slider/slider.component';
+import { GalleriaModule } from 'primeng/galleria';
+import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+const routes:Routes =[
+  {
+    path:'', component: HomeComponent,
+  }
+]
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    GalleriaModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes)
   ],
-  declarations: [HomeComponent]
+  declarations: [
+    TrendingEventsComponent,
+    ComingSoonComponent,
+    HomeComponent,
+    SliderComponent
+  ]
 })
 export class HomeModule { }

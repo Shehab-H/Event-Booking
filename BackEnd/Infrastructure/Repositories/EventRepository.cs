@@ -4,6 +4,7 @@ using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Extensions;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Linq.Expressions;
@@ -37,7 +38,8 @@ namespace Infrastructure.Repositories
         public async Task<ICollection<Event>> GetByDateRange(TimeRange Range)
         {
             var events = await _bookingDbContext.EventsInstances
-                .Where(i => i.Span.Start > Range.Start && i.Span.Start < Range.End)
+                .Where(i => i.Span.Start > Range.Start && i.Span.Start < Range.End &&
+                  !_bookingDbContext.EventsInstances.Any(e=>e.Span.Start<DateTime.Now&&e.EventId==i.EventId))  
                 .Select(i => i.Event)
                 .Distinct()
                 .AsNoTracking()
@@ -75,23 +77,23 @@ namespace Infrastructure.Repositories
 
         public  async Task<ICollection<Event>> GetTrendingEvents( int take = 10)
         {
-            var events = await  _bookingDbContext
-                .SeatedEventInstances
-                .Where(i => i.Reservations
-                .Where(r => r.DateCreated >= DateTime.Now.AddDays(-3)).Any())
-                .OrderByDescending(i => i.Reservations.SelectMany(r => r.BookedSeats).Count())
-                .Distinct()
-                .Select(i => i.Event)
-                .Concat(
-                    _bookingDbContext
-                    .StandingEventInstances
-                    .Where(i => i.Reservations
-                         .Where(r => r.DateCreated >= DateTime.Now.AddDays(-3)).Any())
-                    .OrderByDescending(i => i.Reservations.Select(r => r.Quantity).Sum())
-                    .Distinct()
-                    .Select(i => i.Event)
-                ).Take(10).ToListAsync();
-              
+            //var events = await _bookingDbContext
+            //    .SeatedEventInstances
+            //    .Where(i => i.Reservations
+            //    .Where(r => r.DateCreated >= DateTime.Now.AddDays(-7)).Any())
+            //    .OrderByDescending(i => i.Reservations.SelectMany(r => r.BookedSeats).Count())
+            //    .Select(i=>i.Event)
+            //    .ToListAsync();
+            //.Concat(
+            //    _bookingDbContext
+            //    .StandingEventInstances
+            //    .Where(i => i.Reservations
+            //         .Where(r => r.DateCreated >= DateTime.Now.AddDays(-7)).Any())
+            //    .OrderByDescending(i => i.Reservations.Select(r => r.Quantity).Sum())
+            //    .Distinct()
+            //    .Select(i => i.Event)
+            //).Take(10).ToListAsync();
+            var events = await _bookingDbContext.Events.FromSql($"Exec GetTrendingEvents").ToListAsync();    
             return events;
         }
     }
