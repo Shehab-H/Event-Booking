@@ -47,6 +47,10 @@ namespace Infrastructure.Data
 
             });
 
+            modelBuilder.Entity<Event>()
+                .HasIndex(e => e.Name)
+                .IsUnique();
+
             modelBuilder.Entity<SeatedReservation>().HasMany(i=>i.BookedSeats).WithMany();
 
             modelBuilder.Entity<SeatedEventInstance>().Ignore(e => e.AllReservedSeats);

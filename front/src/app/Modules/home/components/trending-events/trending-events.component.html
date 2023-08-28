@@ -2,12 +2,16 @@
 <h1 style="margin-left: 9%;">
   Trending Events
 </h1>
+
 <div class="d-flex flex-wrap justify-content-center  w-100 flex-wrap">
+
   <div *ngFor="let event of events;let i=index" class=" m-2 bg-black event-card " [style.flex-basis]="cardWidth[i]">
-    <img [src]="event.backGroundUrl" alt="">
-    <div class="d-flex justify-content-between p-3 w-100 h-25">
-      <h5 class="w-75 event-name">{{event.name | uppercase}}</h5>
-      <button>Buy</button>
-    </div>
+    <a id="event-link" [routerLink]="['/event',event.id]">
+      <img [src]="event.backGroundUrl" alt="">
+      <div class="d-flex justify-content-between p-3 w-100 h-25">
+        <h5 class="w-75 event-name">{{event.name | uppercase}}</h5>
+        <button>Buy</button>
+      </div>
+    </a>
   </div>
 </div>

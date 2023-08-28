@@ -60,3 +60,7 @@
   color: black;
   background-color: #fcb933;
 }
+
+#event-link{
+  text-decoration: none;
+}

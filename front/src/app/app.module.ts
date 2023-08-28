@@ -14,6 +14,8 @@ import { PaymentComponent } from './Components/Payment/Payment.component';
 import { LoadingComponent } from './Components/Loading/Loading.component';
 import { ErrorComponent } from './Components/Error/Error.component';
 import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ToastModule } from 'primeng/toast';
     MatButtonModule,
     HttpClientModule,
     NgxPayPalModule,
-    ToastModule
+    ToastModule,
+    InputTextModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

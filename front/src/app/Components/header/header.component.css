@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+
 nav .logo {
   color: #ffac07 !important;
   text-shadow: 1px 1px #FF0000;
@@ -56,4 +58,29 @@ nav{
   padding: 10px;
   height: fit-content;
   background-color: black;
+}
+
+i{
+  color: white;
+}
+
+.search-event-container{
+  cursor: pointer;
+}
+.search-event-container:hover{
+  border-radius: 9px;
+  color: black;
+  background-color:#ffac07;
+}
+
+.search-container{
+  border-radius: 5px;
+  position: relative;
+  bottom: 9px;
+}
+
+.search-area{
+  position: absolute;
+  z-index: 999;
+  color: white;
 }

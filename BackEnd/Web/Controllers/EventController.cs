@@ -207,5 +207,21 @@ namespace Web.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("[action]/{eventName}")]
+
+        public async Task<IActionResult> Search(string eventName)
+        {
+            try
+            {
+                var events = await _mediator.Send(new SearchEventsByNameQuery(eventName));
+                return Ok(events);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

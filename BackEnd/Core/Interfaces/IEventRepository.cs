@@ -16,5 +16,7 @@ namespace Core.Interfaces
 
         public ICollection<SeatedVenueNamesDto> GetVenueNames(int eventId);
 
+        public Task<ICollection<Event>> SearchByName(string name);
+
     }
 }

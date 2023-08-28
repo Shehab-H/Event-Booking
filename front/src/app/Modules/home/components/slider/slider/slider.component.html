@@ -1,7 +1,0 @@
-
-<div class="w-100 h-75" id="bg-img-container" style="position: relative;overflow-x: hidden;">
-
-    <img *ngFor="let event of events"
-     [@slide]="event.state" id="current"
-      [src]="event.event.backGroundUrl" draggable="false">
-</div>

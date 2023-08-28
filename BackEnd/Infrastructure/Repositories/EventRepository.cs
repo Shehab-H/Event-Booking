@@ -77,23 +77,15 @@ namespace Infrastructure.Repositories
 
         public  async Task<ICollection<Event>> GetTrendingEvents( int take = 10)
         {
-            //var events = await _bookingDbContext
-            //    .SeatedEventInstances
-            //    .Where(i => i.Reservations
-            //    .Where(r => r.DateCreated >= DateTime.Now.AddDays(-7)).Any())
-            //    .OrderByDescending(i => i.Reservations.SelectMany(r => r.BookedSeats).Count())
-            //    .Select(i=>i.Event)
-            //    .ToListAsync();
-            //.Concat(
-            //    _bookingDbContext
-            //    .StandingEventInstances
-            //    .Where(i => i.Reservations
-            //         .Where(r => r.DateCreated >= DateTime.Now.AddDays(-7)).Any())
-            //    .OrderByDescending(i => i.Reservations.Select(r => r.Quantity).Sum())
-            //    .Distinct()
-            //    .Select(i => i.Event)
-            //).Take(10).ToListAsync();
             var events = await _bookingDbContext.Events.FromSql($"Exec GetTrendingEvents").ToListAsync();    
+            return events;
+        }
+
+        public async Task<ICollection<Event>> SearchByName(string name)
+        {
+            var events = await _bookingDbContext.Events.AsNoTracking()
+                .Where(e => e.Name.StartsWith(name)).Take(10).ToListAsync();
+
             return events;
         }
     }
