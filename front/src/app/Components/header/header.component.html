@@ -1,4 +1,4 @@
-<nav style="z-index: 1;" class="navbar navbar-expand w-100 ">
+<nav style="z-index: 999;position: fixed;" class="navbar navbar-expand w-100 ">
   <div *ngIf="!searchActive" class="container-lg">
     <div class="row w-100 d-flex justify-content-between">
       <div  class="d-flex justify-content-start">
@@ -25,25 +25,30 @@
   <!-- search after typing -->
   <div class="w-100 d-flex justify-content-center" *ngIf="searchActive">
     <span class="p-input-icon-left w-50">
-      <i *ngIf="!typing" class="pi pi-search"></i>
-      <i *ngIf="typing" class="pi pi-spin pi-spinner"></i>
-      <input  #search (input)="searchInputChange()"
-       (blur)="SearchUnfocused()"
+      <i *ngIf="!loadingEvents" class="pi pi-search"></i>
+      <i *ngIf="loadingEvents" class="pi pi-spin pi-spinner"></i>
+      <input    #search (input)="searchInputChange()"
        class="w-100"  placeholder="search" type="text" pInputText [(ngModel)]="searchValue" />
     </span>
   </div>
 </nav>
 
 <!-- searched events -->
-<div *ngIf="typing" class="w-100 d-flex justify-content-center search-area">
-  <div class="w-50 bg-dark search-container">
-    <div *ngFor="let event of testSearchEvents" class="d-flex p-3 search-event-container">
-      <img  [src]="event.image" style="width: 10%; border-radius: 5px;  object-fit: cover;" >
-      <span class="m-2">
-        {{event.name}}
-      </span>
-    </div>
+<div #searchResult  *ngIf="typing" class="w-100 d-flex justify-content-center search-area">
+  <div  class="w-50 bg-dark search-container">
+    <a  *ngFor="let event of events" [routerLink]="['/event',event.id]" >
+      <div (click)="hideSearch()"   class="d-flex p-3 search-event-container">
+        <img  [src]="event.imageUrl" style="width: 10%; border-radius: 5px;  object-fit: cover;" >
+        <span class="m-2">
+          {{event.name}}
+        </span>
+      </div>
+    </a>
   </div>
 </div>
 
 
+<div *ngIf="showOverlay"
+class="w-100 h-100 bg-black" style="opacity: 80%;z-index: 1;position: fixed;top: 0;" >
+
+</div>

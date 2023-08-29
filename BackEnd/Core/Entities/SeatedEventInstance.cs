@@ -18,7 +18,7 @@ namespace Core.Entities
         public IReadOnlyCollection<SeatedReservation> Reservations => _reservations.ToList();
         public ICollection<Seat> AllReservedSeats => _reservations.SelectMany(r => r.BookedSeats).ToList();
 
-        public SeatedEventInstance(int venueId,TimeRange span , int eventId) : base(span, eventId)
+        public SeatedEventInstance(int venueId,TimeRange span , int eventId) : base(span, eventId) 
         {
             VenueId = venueId;
         }

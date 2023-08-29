@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yAkFJiimsxy3DdKYJ2f7oIwy0OvyYgq0rmDU1FV+hG0=",
+  "Hash": "Cet6D7T8NPy+cDys4D2xtoLgBj4Ld50tK9nXOUXcjrM=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -32,6 +32,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\2001.webp"
+    },
+    {
+      "Identity": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\50-verdens-verste-menneske-oslo-pictures_wide-52fe31568d45897f5990960f1cf989fedbf2c828-s900-c85.webp",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "50-verdens-verste-menneske-oslo-pictures_wide-52fe31568d45897f5990960f1cf989fedbf2c828-s900-c85.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\50-verdens-verste-menneske-oslo-pictures_wide-52fe31568d45897f5990960f1cf989fedbf2c828-s900-c85.webp"
+    },
+    {
+      "Identity": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\6L3H5ROSWCZENI53N72IFMEP5A.jpg",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "6L3H5ROSWCZENI53N72IFMEP5A.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\6L3H5ROSWCZENI53N72IFMEP5A.jpg"
     },
     {
       "Identity": "C:\\Users\\HFCS\\Desktop\\Study projects\\Event-Booking\\BackEnd\\Web\\wwwroot\\asteroid-city.jpg",

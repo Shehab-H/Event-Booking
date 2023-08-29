@@ -7,6 +7,7 @@ import { GlobalConfigurationService } from 'src/app/Services/Global-Configuratio
 import { IVenue } from '../View Models/Response Models/IVenue';
 import { map } from 'rxjs/operators';
 import { Iseat } from '../View Models/Response Models/ISeat';
+import { ISearchEvent } from '../View Models/Response Models/ISearchEvent';
 
 @Injectable({
   providedIn: 'root',
@@ -73,4 +74,20 @@ export class EventService {
   makeReservation(eventInstanceId:number,seatIds:number[]):Observable<any>{
     return this.httpClient.patch<any>(`${this.config.ApiUrl}/Event/Book/${eventInstanceId}`,seatIds);
   }
+
+  search(searchString:string):Observable<ISearchEvent[]>{
+    return this.httpClient.get<ISearchEvent[]>(`${this.config.ApiUrl}/Event/Search/${searchString}`)
+    .pipe(
+      map(response => response.map((event:ISearchEvent) =>
+      {
+        const searchEvent:ISearchEvent = {
+          id:event.id,
+          name:event.name,
+          imageUrl:`${this.config.ApiUrl}/${event.imageUrl}`
+        }
+        return searchEvent;
+    }))
+    );
+  }
+
 }

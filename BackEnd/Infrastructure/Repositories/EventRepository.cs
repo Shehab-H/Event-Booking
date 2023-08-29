@@ -81,12 +81,16 @@ namespace Infrastructure.Repositories
             return events;
         }
 
-        public async Task<ICollection<Event>> SearchByName(string name)
+        public async Task<ICollection<SearchEventDto>> SearchByName(string name)
         {
             var events = await _bookingDbContext.Events.AsNoTracking()
-                .Where(e => e.Name.StartsWith(name)).Take(10).ToListAsync();
+                .Where(e => e.Name.StartsWith(name))
+                .Select(e => new SearchEventDto(e.Id, e.Name, e.BackGroundUrl))
+                .Take(10)
+                .ToListAsync();
 
             return events;
         }
+
     }
 }

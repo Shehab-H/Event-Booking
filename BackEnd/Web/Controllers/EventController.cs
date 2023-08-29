@@ -1,10 +1,11 @@
 ﻿using Application.Commands;
 using Application.Queries;
+using Core.DTO_s;
 using Core.Entities;
 using Infrastructure.Data;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
+using Web.UserServices;
 
 namespace Web.Controllers
 {
@@ -15,12 +16,17 @@ namespace Web.Controllers
         private readonly IMediator _mediator;
 
         private readonly BookingDbContext _bookingDbContext;
+
+        private readonly ISaveFile _saveFileService;
         
         public EventController( BookingDbContext bookingDbContext 
-            ,IMediator mediator)
+            ,IMediator mediator
+            , ISaveFile saveFileService
+            )
         {
             _mediator = mediator;
             _bookingDbContext = bookingDbContext;
+            _saveFileService = saveFileService;
         }
 
         #region seed data
@@ -210,7 +216,6 @@ namespace Web.Controllers
 
         [HttpGet]
         [Route("[action]/{eventName}")]
-
         public async Task<IActionResult> Search(string eventName)
         {
             try
@@ -223,5 +228,38 @@ namespace Web.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPost]
+        [Route("[action]")]
+
+        public async Task<IActionResult> Add(
+          IFormFile backgroundImg
+        , IFormFile ThumbnailImg
+        ,[FromForm] AddEventDto eventData
+         )
+        {
+            try
+            {
+                var backgroundImgName = await _saveFileService.Save(backgroundImg);
+                var ThumbnailImgName = await _saveFileService.Save(ThumbnailImg);
+
+                await _mediator.Send(new AddEventCommand(new Event(
+                    eventData.name,
+                    eventData.type,
+                    backgroundImgName,
+                    ThumbnailImgName,
+                    eventData.description,
+                    eventData.descriptionTitle
+                    )));
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+        }
+
+
     }
 }

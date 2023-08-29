@@ -13,7 +13,6 @@ export class LoadingComponent implements OnInit {
       if (event instanceof NavigationStart) {
         this.loading = true;
       } else if (event instanceof NavigationEnd) {
-
         this.loading = false;
       }
     })

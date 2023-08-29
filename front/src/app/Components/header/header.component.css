@@ -80,7 +80,12 @@ i{
 }
 
 .search-area{
-  position: absolute;
+  position: fixed;
+  top: 62px;
   z-index: 999;
   color: white;
+}
+.search-container a {
+  color: white;
+  text-decoration: none;
 }

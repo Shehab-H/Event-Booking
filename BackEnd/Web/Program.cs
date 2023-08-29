@@ -3,6 +3,7 @@ using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Web.UserServices;
 
 namespace Web
 {
@@ -23,6 +24,12 @@ namespace Web
             builder.Services.AddScoped<IEventInstancesRepository, EventInstancesRepository>();
             builder.Services.AddScoped<ISeatsRepository, SeatsRepository>();
             builder.Services.AddScoped<IEventRepository, EventRepository>();
+            builder.Services.AddScoped<IEventCrudRepository, EventCrudRepository>();
+            builder.Services.AddScoped<ISeatedInstanceRepository, SeatedInstanceRepository>();
+            builder.Services.AddScoped<ISeatedVenueRepository, SeatedVenueRepository>();
+            builder.Services.AddScoped<ISaveFile, SaveFile>();
+
+
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetEventsByDateRangeQuery).Assembly));
 
             builder.Services.AddCors(options =>
