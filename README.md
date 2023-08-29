@@ -1,1 +1,2 @@
-# Event-Booking
+# Project is still under construction 
+# Please Note that there are some cruciel parts missing like exception handeling and some things were done very quickly just for the sake of getting things working and those things will be fixed , like for instance bloated api controllers or missing unit of work and database atomicity from query and command handlers , some repositories are also not well constructed and functionallity needs to be modulized better etc...
