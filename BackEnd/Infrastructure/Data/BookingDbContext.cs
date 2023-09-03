@@ -1,16 +1,12 @@
 ﻿using Core.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Infrastructure.Data
 {
-    public class BookingDbContext : DbContext
+    public class BookingDbContext : IdentityDbContext
     {
         public DbSet<Event> Events { get; set; }
 

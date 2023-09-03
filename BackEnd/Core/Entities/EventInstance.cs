@@ -16,6 +16,9 @@ namespace Core.Entities
         public Event Event { get; private set; }
         public EventInstance(TimeRange span, int eventId)
         {
+            if (span.Start < DateTime.UtcNow || span.End < DateTime.UtcNow)
+                throw new ArgumentException("invalid time span");
+
             Span = span;
             EventId = eventId;
         }

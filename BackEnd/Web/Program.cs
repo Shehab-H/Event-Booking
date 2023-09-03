@@ -2,7 +2,12 @@ using Application.Queries;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Web.Config;
 using Web.UserServices;
 
 namespace Web
@@ -21,6 +26,7 @@ namespace Web
 
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
+            builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection(key: "JwtConfig"));
             builder.Services.AddScoped<IEventInstancesRepository, EventInstancesRepository>();
             builder.Services.AddScoped<ISeatsRepository, SeatsRepository>();
             builder.Services.AddScoped<IEventRepository, EventRepository>();
@@ -29,6 +35,43 @@ namespace Web
             builder.Services.AddScoped<ISeatedVenueRepository, SeatedVenueRepository>();
             builder.Services.AddScoped<ISaveFile, SaveFile>();
 
+            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail = true;
+            })
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<BookingDbContext>()
+                ;
+
+            builder.Services.AddAuthentication(
+                configureOptions: options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }
+                )
+                .AddJwtBearer( jwt =>
+                {
+                    var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection(key: "JwtConfig:Secret").Value);
+                    jwt.SaveToken = true;
+                    jwt.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        RequireExpirationTime = false,
+                        ValidateLifetime = false
+                    };
+                }        
+                );
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
+            });
 
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetEventsByDateRangeQuery).Assembly));
 
@@ -57,6 +100,8 @@ namespace Web
             app.UseStaticFiles();
 
             app.UseCors("AllowSpecifcOrigin");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

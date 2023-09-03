@@ -3,11 +3,11 @@ import { IEvent } from '../View Models/Response Models/IEvent';
 import { IShowTime } from '../View Models/Response Models/IShowTime';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GlobalConfigurationService } from 'src/app/Services/Global-Configuration.service';
 import { IVenue } from '../View Models/Response Models/IVenue';
 import { map } from 'rxjs/operators';
 import { Iseat } from '../View Models/Response Models/ISeat';
 import { ISearchEvent } from '../View Models/Response Models/ISearchEvent';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -15,23 +15,24 @@ import { ISearchEvent } from '../View Models/Response Models/ISearchEvent';
 export class EventService {
   constructor(
     private httpClient: HttpClient,
-    private config: GlobalConfigurationService
-  ) {}
+  ) {
+
+  }
 
   getEventById(id: number): Observable<IEvent> {
-    return this.httpClient.get<IEvent>(`${this.config.ApiUrl}/Event/Get/${id}`);
+    return this.httpClient.get<IEvent>(`${environment.ApiUrl}/Event/Get/${id}`);
   }
 
   getVenues(eventId: number): Observable<IVenue[]> {
     return this.httpClient.get<IVenue[]>(
-      `${this.config.ApiUrl}/Event/GetVenues/${eventId}`
+      `${environment.ApiUrl}/Event/GetVenues/${eventId}`
     );
   }
 
   getEventShowTimes(eventId: number, venueId: number): Observable<IShowTime[]> {
     return this.httpClient
       .get<IShowTime[]>(
-        `${this.config.ApiUrl}/Event/GetRunTimes/${eventId}/${venueId}`
+        `${environment.ApiUrl}/Event/GetRunTimes/${eventId}/${venueId}`
       )
       .pipe(
         map((response) =>
@@ -49,7 +50,7 @@ export class EventService {
     return this.httpClient.get<{
       availableSeats: [{ id: number; row: string; number: number }];
       reservedSeats: [{ id: number; row: string; number: number }];
-    }>(`${this.config.ApiUrl}/Event/GetSeats/${eventiterationId}`).pipe(
+    }>(`${environment.ApiUrl}/Event/GetSeats/${eventiterationId}`).pipe(
       map((response)=>
       response.availableSeats.map(
         (i)=>({
@@ -72,18 +73,18 @@ export class EventService {
   }
 
   makeReservation(eventInstanceId:number,seatIds:number[]):Observable<any>{
-    return this.httpClient.patch<any>(`${this.config.ApiUrl}/Event/Book/${eventInstanceId}`,seatIds);
+    return this.httpClient.patch<any>(`${environment.ApiUrl}/Event/Book/${eventInstanceId}`,seatIds);
   }
 
   search(searchString:string):Observable<ISearchEvent[]>{
-    return this.httpClient.get<ISearchEvent[]>(`${this.config.ApiUrl}/Event/Search/${searchString}`)
+    return this.httpClient.get<ISearchEvent[]>(`${environment.ApiUrl}/Event/Search/${searchString}`)
     .pipe(
       map(response => response.map((event:ISearchEvent) =>
       {
         const searchEvent:ISearchEvent = {
           id:event.id,
           name:event.name,
-          imageUrl:`${this.config.ApiUrl}/${event.imageUrl}`
+          imageUrl:`${environment.ApiUrl}/${event.imageUrl}`
         }
         return searchEvent;
     }))
