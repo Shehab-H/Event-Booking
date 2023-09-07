@@ -1,3 +1,55 @@
-<p>
-  signup works!
-</p>
+<nav class="p-4">
+  <a class="f1-heavy fs-3 logo m-4" routerLink=""  href="#">CAIRO TICKETS</a>
+</nav>
+
+<h1 *ngIf="devfix">Invalid Credentials , developer fix</h1>
+
+
+<div class="w-100 h-100 d-flex align-items-center justify-content-center">
+
+
+  <div style="position: relative;" class="w-25 h-75" id="login-box">
+
+    <!-- spinner -->
+    <div *ngIf="loading"
+     class="w-100 h-100 d-flex justify-content-center align-items-center" style="position: absolute;">
+      <span class="loader"></span>
+    </div>
+    <!-- end of spinner -->
+
+
+    <div class="p-5" *ngIf="!loading">
+      <h1 class="f-book ">
+        Sign up
+      </h1>
+      <div class="mt-4">
+        <small class="f-book" id="email-help">{{emailHelp}}</small>
+        <input type="text" aria-describedby="email-help" pInputText [(ngModel)]="email" placeholder="Email" />
+      </div>
+
+      <div class="mt-4">
+        <small class="f-book" id="username-Help">{{usernameHelp}}</small>
+        <input type="text" aria-describedby="username-Help" pInputText [(ngModel)]="username" placeholder="Username" />
+      </div>
+
+      <div class="mt-4">
+        <small class="f-book" id="password-help">{{passwordHelp}}</small>
+
+        <input type="password" aria-describedby="password-help" pInputText [(ngModel)]="password" placeholder="Password" />
+      </div>
+
+
+      <div class="mt-5">
+        <p-button (onClick)="signup()"  class="signup" label="Sign up" styleClass="p-button-raised login  w-100"></p-button>
+      </div>
+
+      <div class="mt-4  f-book">
+        <p class="text-center">
+           <span>
+            <a routerLink="/user/login">Login</a> instead
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

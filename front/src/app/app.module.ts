@@ -16,6 +16,8 @@ import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { JwtInterceptor } from './Interceptors/JwtInterceptor';
+import { JwtHelperService ,JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { DefultLayoutComponent } from './Components/DefultLayout/DefultLayout.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { JwtInterceptor } from './Interceptors/JwtInterceptor';
     FooterComponent,
     PaymentComponent,
     LoadingComponent,
-    ErrorComponent
+    ErrorComponent,
+    DefultLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +39,13 @@ import { JwtInterceptor } from './Interceptors/JwtInterceptor';
     NgxPayPalModule,
     ToastModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

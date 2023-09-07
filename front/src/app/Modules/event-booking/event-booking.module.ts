@@ -14,6 +14,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import {CdkDrag} from '@angular/cdk/drag-drop'
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 const routes:Routes =[
   {
     path:'', component: EventComponent,

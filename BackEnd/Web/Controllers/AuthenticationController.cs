@@ -18,17 +18,19 @@ namespace Web.Controllers
     [ApiController]
     public class AuthenticationController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly JwtConfig _jwtConfig;
         private readonly IMediator _mediator;
-        public AuthenticationController(UserManager<IdentityUser> userManager
-            ,IOptionsMonitor<JwtConfig> optionsMonitor
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public AuthenticationController(
+            IOptionsMonitor<JwtConfig> optionsMonitor
             , IMediator mediator
+            , UserManager<IdentityUser> userManager
             )
         {
-            _userManager = userManager;
             _jwtConfig = optionsMonitor.CurrentValue;
             _mediator = mediator;
+            _userManager = userManager;
         }
 
 
@@ -46,15 +48,7 @@ namespace Web.Controllers
                       return BadRequest(Results.SelectMany(r=>r.Errors).Select(x => x.Description).ToList());
                     }
 
-                var user = new IdentityUser()
-                {
-                    Email = command.Email,
-                };
-                var token = GenerateJwtToken(user);
-
-                var result = new AuthResult(token, true, new());
-
-                return Ok(result);
+                return Ok();
 
             }
             return BadRequest("invalid request payload");
@@ -69,7 +63,7 @@ namespace Web.Controllers
                 {
                     var login = await _mediator.Send(command);
 
-                    var token = GenerateJwtToken(login.user);
+                    var token = await GenerateJwtToken(login.user);
 
                     var result = new AuthResult(token, true, new());
 
@@ -88,30 +82,36 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        [Route("[action]")]
+        [Route("[action]/{role}")]
         [Authorize]
-        public  IActionResult GetUserCredentials()
+        public  IActionResult CheckRole(string role)
         {
-            var roles =  User.Claims.Select(s=>s.Value).ToList();
-            return Ok(roles);
+            var userHasRole = User.IsInRole(role);
+            return Ok(userHasRole);
         }
 
-        private string GenerateJwtToken(IdentityUser user)
+        private async Task<string> GenerateJwtToken(IdentityUser user)
         {
             var jwtTokenHanlder = new JwtSecurityTokenHandler();
 
             var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
 
-            var tokenDiscriptor = new SecurityTokenDescriptor()
-            {
-                Subject = new ClaimsIdentity(new[]
+            var claims = new List<Claim>
                 {
                     new Claim("Id",user.Id),
                     new Claim(JwtRegisteredClaimNames.Sub,user.Email),
                     new Claim(JwtRegisteredClaimNames.Sub,user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                }),
+                };
+            var roles =  await _userManager.GetRolesAsync(user);
 
+            foreach(var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+            var tokenDiscriptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddHours(4),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key)
                 ,

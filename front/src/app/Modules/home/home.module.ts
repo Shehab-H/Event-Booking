@@ -9,6 +9,7 @@ import { ComingSoonComponent } from './components/coming-soon/coming-soon.compon
 const routes:Routes =[
   {
     path:'', component: HomeComponent,
+
   }
 ]
 @NgModule({

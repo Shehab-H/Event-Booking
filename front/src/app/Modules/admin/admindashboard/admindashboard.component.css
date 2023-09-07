@@ -1,0 +1,7 @@
+::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  color: #fafafa;
+}
+::ng-deep .p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+  border-color: #fcb933;
+  color:#fcb933;
+}

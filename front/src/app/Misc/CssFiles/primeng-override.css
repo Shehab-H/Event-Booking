@@ -25,8 +25,9 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: transparent;
-  border-color: #fcb933;
+  border-color: #000000;
 }
+
 
 .p-tabmenu .p-tabmenu-nav-btn.p-link {
   background:black;

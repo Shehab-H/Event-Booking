@@ -1,0 +1,69 @@
+#login-box{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border-radius: 7px;
+}
+ .p-inputtext:enabled{
+  z-index: 999;
+  color: black;
+  border-color: gray;
+  width: 100%;
+  border-radius: 3px;
+  background-color: white !important;
+}
+ .p-inputtext:enabled::placeholder{
+  color: gray;
+}
+.p-inputtext:enabled:focus{
+  border-color: black;
+}
+
+#email-help, #password-help
+{
+  display: inline-block;
+  min-width: 100px; /* Set the desired minimum width */
+  color: red;
+}
+::ng-deep .p-button:enabled:hover {
+  background: #de980b;
+  color: black;
+
+  border-color: transparent;
+}
+
+::ng-deep .p-button:enabled {
+  color: black;
+  background: #fcb933;
+  border-color: transparent;
+}
+
+nav .logo {
+  color: #ffac07 !important;
+  text-shadow: 1px 1px #000000;
+  text-decoration: none;
+  font-size: x-large !important;
+}
+nav{
+  position: absolute;
+}
+
+
+.loader {
+  top: 0px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid #d58e00 ;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
